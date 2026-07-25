@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import type { Translate } from "../i18n";
+import { normalizeUnsignedInteger } from "../input";
 
 interface FieldProps {
   label: string;
@@ -9,6 +10,7 @@ interface FieldProps {
   className?: string;
   children: ReactNode;
 }
+
 export function Field({
   label,
   htmlFor,
@@ -35,11 +37,11 @@ interface NumberFieldProps {
   label: string;
   value: number;
   onChange: (value: number) => void;
+  onValidityChange?: (id: string, invalid: boolean) => void;
   errorCode?: string;
   t: Translate;
   min?: number;
   max?: number;
-  step?: number;
   suffix?: string;
   disabled?: boolean;
   hint?: string;
@@ -51,35 +53,67 @@ export function NumberField({
   label,
   value,
   onChange,
+  onValidityChange,
   errorCode,
   t,
   min,
   max,
-  step = 1,
   suffix,
   disabled,
   hint,
   className,
 }: NumberFieldProps) {
+  const [draft, setDraft] = useState(() => String(value));
+  const [editing, setEditing] = useState(false);
+  const empty = draft.length === 0;
+
+  useEffect(() => {
+    if (!editing) setDraft(String(value));
+  }, [editing, value]);
+
+  useEffect(
+    () => () => onValidityChange?.(id, false),
+    [id, onValidityChange],
+  );
+
+  function handleChange(raw: string) {
+    if (!/^\d*$/.test(raw)) return;
+    const normalized = normalizeUnsignedInteger(raw);
+    setDraft(normalized);
+    onValidityChange?.(id, normalized === "");
+    if (normalized !== "") onChange(Number(normalized));
+  }
+
   return (
     <Field
       label={label}
       htmlFor={id}
-      error={errorCode ? t(`error.${errorCode}`) : undefined}
+      error={
+        empty
+          ? t("error.required")
+          : errorCode
+            ? t(`error.${errorCode}`)
+            : undefined
+      }
       hint={hint}
       className={className}
     >
       <div className="input-shell">
         <input
           id={id}
-          type="number"
+          type="text"
+          role="spinbutton"
           inputMode="numeric"
-          value={Number.isFinite(value) ? value : ""}
-          min={min}
-          max={max}
-          step={step}
+          pattern="[0-9]*"
+          value={draft}
           disabled={disabled}
-          onChange={(event) => onChange(Number(event.currentTarget.value))}
+          aria-invalid={empty || Boolean(errorCode)}
+          aria-valuemin={min}
+          aria-valuemax={max}
+          aria-valuenow={empty ? undefined : Number(draft)}
+          onFocus={() => setEditing(true)}
+          onBlur={() => setEditing(false)}
+          onChange={(event) => handleChange(event.currentTarget.value)}
         />
         {suffix && <span className="input-suffix">{suffix}</span>}
       </div>

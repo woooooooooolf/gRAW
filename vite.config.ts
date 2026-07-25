@@ -3,11 +3,21 @@ import react from "@vitejs/plugin-react";
 
 // @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
+const buildDate = new Intl.DateTimeFormat("sv-SE", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: false,
+}).format(new Date());
 
 // https://vite.dev/config/
 export default defineConfig(async () => ({
   define: {
-    __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
+    __BUILD_DATE__: JSON.stringify(`${buildDate} +08:00`),
   },
   plugins: [react()],
 

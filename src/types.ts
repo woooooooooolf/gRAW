@@ -96,5 +96,11 @@ export interface GenerationResult {
 }
 
 export type Language = "zh-CN" | "en-US";
-export type ThemeMode = "system" | "dark" | "light";
-export type Palette = "cyan" | "violet" | "blue";
+export type ThemeId =
+  | "deep-sea"
+  | "obsidian-violet"
+  | "deep-space"
+  | "glacier"
+  | "mist-violet"
+  | "clear-sky";
+export type FontSize = "small" | "standard" | "large";

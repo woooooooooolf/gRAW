@@ -1,7 +1,4 @@
-import {
-  formatBytes,
-  formatInteger,
-} from "../config";
+import { formatBytes, formatInteger } from "../config";
 import type { Translate } from "../i18n";
 import type { LocalLayout, RawConfig } from "../types";
 
@@ -29,16 +26,13 @@ export function LayoutSummary({
   const hasRowPadding = layout.rowPadding > 0n;
   const hasFramePadding = layout.framePadding > 0n;
   return (
-    <>
+    <div className="layout-summary">
       <div className="size-hero">
-        <div>
-          <span>{t("summary.total")}</span>
-          <strong>{formatBytes(layout.totalSize, locale)}</strong>
-        </div>
-        <div className="exact-size">
-          <span>{t("summary.exact")}</span>
-          <code>{formatInteger(layout.totalSize, locale)} B</code>
-        </div>
+        <span>{t("summary.total")}</span>
+        <strong>
+          {formatInteger(layout.totalSize, locale)} {t("unit.bytes")}
+          <small>({formatBytes(layout.totalSize, locale)})</small>
+        </strong>
       </div>
 
       <div className="file-map" aria-label={t("section.summary")}>
@@ -100,9 +94,10 @@ export function LayoutSummary({
           locale={locale}
         />
       </div>
-    </>
+    </div>
   );
 }
+
 function Metric({
   label,
   value,

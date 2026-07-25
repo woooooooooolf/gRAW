@@ -1,12 +1,13 @@
 {
   "name": "graw",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "licenses": "node scripts/generate-licenses.mjs",
+    "test:frontend": "node --experimental-strip-types --test tests/input.test.mjs",
     "preview": "vite preview",
     "tauri": "tauri"
   },
