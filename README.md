@@ -2,9 +2,9 @@
 
 gRAW（RAW Generator）是一款面向 Bayer RAW 格式测试图像的便携式生成工具。
 
-当前版本：V0.0.1
+当前版本：V0.0.2
 
-## 首版能力
+## 主要能力
 
 - 支持 Mono、常见 2×2 Bayer CFA 与 Quad CFA。
 - 支持 Unpacked8、Unpacked16、MIPI RAW10、RAW12、RAW14。
@@ -12,8 +12,9 @@ gRAW（RAW Generator）是一款面向 Bayer RAW 格式测试图像的便携式�
 - 支持大小端、有效位对齐、行/帧对齐、文件起始偏移和多帧输出。
 - 支持固定值、渐变、灰阶、彩条、棋盘、随机噪声、黑场和白场测试图。
 - 彩色 CFA 可分别设置 R、Gr、Gb、B 像素值，并可配置偏移、行填充和帧填充字节。
-- 提供实时文件布局、预计大小、参数诊断、生成进度和取消操作。
-- 提供中文/英文、深色/浅色/跟随系统及三套主题色。
+- 提供生成信息、精确文件大小、参数诊断、生成进度和取消操作。
+- 提供中文/英文、三套深色主题、三套浅色主题和三档界面字号。
+- 采用紧凑单页布局，在推荐窗口尺寸内同时呈现全部参数和生成信息。
 
 ## 技术栈
 
@@ -36,6 +37,7 @@ npm run tauri dev
 
 ```powershell
 npm run build
+npm run test:frontend
 cargo fmt --manifest-path src-tauri/Cargo.toml -- --check
 cargo test --manifest-path src-tauri/Cargo.toml
 ```

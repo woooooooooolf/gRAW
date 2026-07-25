@@ -1,6 +1,6 @@
 [package]
 name = "graw"
-version = "0.0.1"
+version = "0.0.2"
 description = "gRAW - Bayer RAW test image generator"
 authors = ["Lingjing Qinghe", "OpenAI Codex"]
 edition = "2024"
@@ -24,4 +24,3 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 fs2 = "0.4"
 tauri-plugin-dialog = "2"
-
