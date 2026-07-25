@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Local release and visual-QA artifacts
+/release/
+/.edge-preview/
+/ui-preview.png
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
