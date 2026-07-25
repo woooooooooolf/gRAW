@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="900" y2="940" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#102b32"/>
+      <stop offset="0.55" stop-color="#07171c"/>
+      <stop offset="1" stop-color="#040b0e"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="260" y1="240" x2="760" y2="790" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#91fff2"/>
+      <stop offset="0.45" stop-color="#27d5d2"/>
+      <stop offset="1" stop-color="#158da5"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="44" y="44" width="936" height="936" rx="236" fill="url(#bg)"/>
+  <rect x="61" y="61" width="902" height="902" rx="219" fill="none" stroke="#4ee0dc" stroke-opacity=".28" stroke-width="10"/>
+  <g opacity=".22">
+    <rect x="176" y="176" width="326" height="326" rx="56" fill="#ef5168"/>
+    <rect x="522" y="176" width="326" height="326" rx="56" fill="#46d58b"/>
+    <rect x="176" y="522" width="326" height="326" rx="56" fill="#46d58b"/>
+    <rect x="522" y="522" width="326" height="326" rx="56" fill="#4b82ef"/>
+  </g>
+  <rect x="218" y="218" width="588" height="588" rx="142" fill="#071419" fill-opacity=".88" stroke="url(#cyan)" stroke-width="18"/>
+  <path d="M654 364c-55-56-139-81-218-57-129 38-194 180-146 306 49 127 196 181 313 116 80-44 119-117 112-217H514v96h93c-21 44-75 66-124 53-73-19-111-98-85-168 26-69 108-99 170-59 16 10 30 24 41 39l45-109Z" fill="url(#cyan)" filter="url(#glow)"/>
+  <g>
+    <rect x="171" y="171" width="42" height="42" rx="12" fill="#ff5871"/>
+    <rect x="811" y="171" width="42" height="42" rx="12" fill="#58e59b"/>
+    <rect x="171" y="811" width="42" height="42" rx="12" fill="#58e59b"/>
+    <rect x="811" y="811" width="42" height="42" rx="12" fill="#5d91ff"/>
+  </g>
+</svg>
