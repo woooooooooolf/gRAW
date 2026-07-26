@@ -70,12 +70,12 @@ function AboutOverview({
         <div>
           <h2 id="about-title">gRAW</h2>
           <p>{t("about.product")}</p>
-          <span>V0.0.3</span>
+          <span>V0.0.4</span>
         </div>
       </div>
       <p className="about-description">{t("about.description")}</p>
       <div className="about-facts">
-        <Fact label={t("about.version")} value="V0.0.3" />
+        <Fact label={t("about.version")} value="V0.0.4" />
         <Fact label={t("about.buildDate")} value={__BUILD_DATE__} />
         <Fact label={t("about.platform")} value={t("about.platformValue")} />
         <Fact label={t("about.designer")} value={t("about.designerValue")} />
