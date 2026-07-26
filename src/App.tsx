@@ -25,6 +25,7 @@ import {
   withStorageFormat,
 } from "./config";
 import { createTranslator } from "./i18n";
+import { calculateViewportScale } from "./viewport";
 import type {
   CfaPattern,
   Endianness,
@@ -108,6 +109,7 @@ function App() {
   const [progress, setProgress] = useState<GenerationProgress | null>(null);
   const [result, setResult] = useState<GenerationResult | null>(null);
   const [runtimeError, setRuntimeError] = useState("");
+  const viewportScale = useViewportScale();
   const t = useMemo(() => createTranslator(language), [language]);
   const errors = useMemo(() => validateConfig(config), [config]);
   const hasDraftError = Object.keys(draftInvalid).length > 0;
@@ -230,7 +232,11 @@ function App() {
   const numberFieldProps = { t, onValidityChange: setDraftValidity };
 
   return (
-    <div className="app-shell">
+    <div
+      className="viewport-stage"
+      style={{ "--viewport-scale": viewportScale } as CSSProperties}
+    >
+      <div className="app-shell">
       <HeaderToolbar
         language={language}
         onLanguageChange={setLanguage}
@@ -393,7 +399,8 @@ function App() {
         </div>
       </footer>
 
-      <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} t={t} />
+        <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} t={t} />
+      </div>
     </div>
   );
 }
@@ -609,6 +616,30 @@ function cfaLabel(value: CfaPattern) {
   if (value === "mono") return "Mono";
   if (value.startsWith("quad")) return `Quad ${value.slice(4).toUpperCase()}`;
   return value.toUpperCase();
+}
+
+function useViewportScale() {
+  const [scale, setScale] = useState(() =>
+    calculateViewportScale(window.innerWidth, window.innerHeight),
+  );
+
+  useEffect(() => {
+    let animationFrame = 0;
+    function updateScale() {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(() => {
+        setScale(calculateViewportScale(window.innerWidth, window.innerHeight));
+      });
+    }
+
+    window.addEventListener("resize", updateScale);
+    return () => {
+      window.removeEventListener("resize", updateScale);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
+  return scale;
 }
 
 function useThemePreference() {

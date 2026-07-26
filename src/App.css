@@ -1089,14 +1089,29 @@ select:disabled {
   }
 }
 
-/* V0.0.2 compact workspace, unified themes and icon toolbar */
+/* Compact workspace, unified themes and icon toolbar */
 :root {
   --button-text: #041516;
+  --compact-width: 860px;
+  --compact-height: 600px;
+  --viewport-scale: 1;
 }
 
 body {
   min-width: 0;
   min-height: 0;
+}
+
+#root {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.viewport-stage {
+  width: var(--compact-width);
+  height: var(--compact-height);
+  zoom: var(--viewport-scale);
 }
 
 :root[data-theme="deep-sea"],
@@ -1243,17 +1258,21 @@ body {
 
 :root[data-font-size="small"] .app-shell {
   width: 106.383%;
-  height: 106.383vh;
+  height: 106.383%;
   zoom: 0.94;
 }
 
 :root[data-font-size="large"] .app-shell {
   width: 92.593%;
-  height: 92.593vh;
+  height: 92.593%;
   zoom: 1.08;
 }
 
 .app-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   grid-template-rows: 44px minmax(0, 1fr) 62px;
 }
 
@@ -1462,7 +1481,8 @@ body {
 }
 
 .workspace-grid {
-  grid-template-rows: minmax(208px, 1fr) 116px 128px;
+  grid-template-rows: 208px 116px 128px;
+  align-content: center;
   gap: 8px;
   width: 100%;
   height: 100%;
@@ -1717,6 +1737,7 @@ body {
 }
 
 .modal-backdrop {
+  position: absolute;
   padding: 16px;
 }
 
@@ -1907,12 +1928,6 @@ body {
   color: var(--accent-bright);
 }
 
-@media (max-height: 640px) {
-  :root[data-font-size="large"] .workspace {
-    overflow: auto;
-  }
-
-  .workspace-grid {
-    grid-template-rows: 208px 116px 128px;
-  }
+:root[data-font-size="large"] .workspace {
+  overflow: auto;
 }
