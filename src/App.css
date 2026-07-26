@@ -526,20 +526,6 @@ select:disabled {
   background-size: cover;
 }
 
-.pattern-banner::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background: linear-gradient(transparent 40%, rgba(2, 10, 13, 0.75));
-}
-
-.pattern-banner span {
-  z-index: 1;
-  color: #f1f8f9;
-  font-size: 9px;
-  font-weight: 600;
-}
-
 .pattern-horizontalGradient { background: linear-gradient(90deg, #05090a, #f0f6f7); }
 .pattern-verticalGradient { background: linear-gradient(#05090a, #f0f6f7); }
 .pattern-graySteps { background: linear-gradient(90deg, #080b0c 0 12.5%, #303738 12.5% 25%, #555e60 25% 37.5%, #778184 37.5% 50%, #9aa5a7 50% 62.5%, #bbc4c5 62.5% 75%, #d7dedf 75% 87.5%, #f7f9f9 87.5%); }
@@ -1478,7 +1464,7 @@ body {
 }
 
 .workspace-grid {
-  grid-template-rows: 208px 116px 128px;
+  grid-template-rows: 198px 136px 128px;
   align-content: center;
   gap: 8px;
   width: 100%;
@@ -1566,6 +1552,7 @@ body {
 
 .pattern-card .card-content {
   display: block;
+  padding-bottom: 12px;
 }
 
 .pattern-top {
@@ -1576,12 +1563,12 @@ body {
 
 .pattern-banner {
   grid-row: auto;
-  min-height: 62px;
-  padding: 7px;
+  min-height: 52px;
+  padding: 0;
   border: 0;
   border-radius: 9px;
   background-clip: border-box;
-  box-shadow: inset 0 0 0 1px var(--border);
+  box-shadow: none;
 }
 
 .pattern-controls {
@@ -1620,6 +1607,10 @@ body {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 7px;
+}
+
+.storage-card .card-content {
+  padding-bottom: 10px;
 }
 
 .format-note {
@@ -1947,8 +1938,6 @@ body {
 
 .card-heading p,
 .format-note,
-.size-hero > span,
-.size-hero strong small,
 .status-copy small,
 .license-entry small,
 .license-entry-label,
@@ -1970,14 +1959,14 @@ body {
 }
 
 .input-suffix,
-.pattern-banner span,
 .back-button,
 .about-heading > div > span {
   font-size: calc(9px * var(--text-scale));
 }
 
 .status-copy strong,
-.about-description {
+.about-description,
+.size-hero strong small {
   font-size: calc(11px * var(--text-scale));
 }
 
@@ -1985,7 +1974,6 @@ body {
 .cfa-cell,
 .cfa-origin,
 .fill-field > code,
-.file-segment,
 .progress-meta,
 .license-view .license-row span,
 .license-view .license-row small,
@@ -1993,18 +1981,23 @@ body {
   font-size: calc(7px * var(--text-scale));
 }
 
+.file-segment,
+.size-hero > span {
+  font-size: calc(9px * var(--text-scale));
+}
+
 .file-segment small,
 .metric span,
 .metric small {
-  font-size: calc(6px * var(--text-scale));
+  font-size: calc(7px * var(--text-scale));
 }
 
 .size-hero strong {
-  font-size: calc(14px * var(--text-scale));
+  font-size: calc(15px * var(--text-scale));
 }
 
 .metric strong {
-  font-size: calc(9px * var(--text-scale));
+  font-size: calc(10px * var(--text-scale));
 }
 
 .about-heading h2 {

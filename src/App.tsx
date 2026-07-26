@@ -20,8 +20,10 @@ import {
   formatInteger,
   hexByte,
   maxValue,
+  testPatternsFor,
   validateConfig,
   withBitDepth,
+  withCfaPattern,
   withStorageFormat,
 } from "./config";
 import { createTranslator } from "./i18n";
@@ -63,17 +65,6 @@ const cfaPatterns: CfaPattern[] = [
   "quadGrbg",
   "quadGbrg",
   "quadBggr",
-];
-const testPatterns: TestPattern[] = [
-  "fixed",
-  "horizontalGradient",
-  "verticalGradient",
-  "graySteps",
-  "colorBars",
-  "checkerboard",
-  "randomNoise",
-  "black",
-  "white",
 ];
 const fontSizes: readonly FontSize[] = FONT_SIZES;
 const themeOptions: {
@@ -258,7 +249,7 @@ function App() {
                   onChange={(value) => update("height", value)} errorCode={errors.height}
                   min={1} suffix="px" {...numberFieldProps} />
                 <SelectField id="cfa" label={t("field.cfa")} value={config.cfaPattern}
-                  onChange={(value) => update("cfaPattern", value as CfaPattern)}
+                  onChange={(value) => transformConfig((current) => withCfaPattern(current, value as CfaPattern))}
                   options={cfaPatterns.map((value) => ({ value, label: cfaLabel(value) }))}
                   className="span-2" />
               </div>
@@ -268,13 +259,13 @@ function App() {
 
           <Card title={t("section.pattern")} hint={t("section.patternHint")} className="pattern-card">
             <div className="pattern-top">
-              <div className={`pattern-banner pattern-${config.testPattern}`}>
-                <span>{t(`pattern.${config.testPattern}`)}</span>
-              </div>
+              <div className={`pattern-banner pattern-${config.testPattern}`}
+                role="img" aria-label={t(`pattern.${config.testPattern}`)} />
               <div className="pattern-controls">
                 <SelectField id="pattern" label={t("field.pattern")} value={config.testPattern}
                   onChange={(value) => update("testPattern", value as TestPattern)}
-                  options={testPatterns.map((value) => ({ value, label: t(`pattern.${value}`) }))} />
+                  options={testPatternsFor(config.cfaPattern).map((value) => ({ value, label: t(`pattern.${value}`) }))}
+                  error={errors.testPattern ? t(`error.${errors.testPattern}`) : undefined} />
                 {config.testPattern === "graySteps" && (
                   <NumberField id="gray-steps" label={t("field.graySteps")} value={config.graySteps}
                     onChange={(value) => update("graySteps", value)} errorCode={errors.graySteps}

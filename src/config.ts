@@ -1,7 +1,9 @@
 import type {
+  CfaPattern,
   LocalLayout,
   RawConfig,
   StorageFormat,
+  TestPattern,
 } from "./types";
 
 export const DEFAULT_CONFIG: RawConfig = {
@@ -33,6 +35,42 @@ export const DEFAULT_CONFIG: RawConfig = {
 };
 
 export const BIT_DEPTHS = Array.from({ length: 9 }, (_, index) => index + 8);
+
+export const TEST_PATTERNS: readonly TestPattern[] = [
+  "fixed",
+  "horizontalGradient",
+  "verticalGradient",
+  "graySteps",
+  "colorBars",
+  "checkerboard",
+  "randomNoise",
+  "black",
+  "white",
+];
+
+const MONO_TEST_PATTERNS = TEST_PATTERNS.filter(
+  (pattern) => pattern !== "colorBars",
+);
+
+export function testPatternsFor(
+  cfaPattern: CfaPattern,
+): readonly TestPattern[] {
+  return cfaPattern === "mono" ? MONO_TEST_PATTERNS : TEST_PATTERNS;
+}
+
+export function withCfaPattern(
+  config: RawConfig,
+  cfaPattern: CfaPattern,
+): RawConfig {
+  const supportedPatterns = testPatternsFor(cfaPattern);
+  return {
+    ...config,
+    cfaPattern,
+    testPattern: supportedPatterns.includes(config.testPattern)
+      ? config.testPattern
+      : "graySteps",
+  };
+}
 
 export function bitDepthsFor(format: StorageFormat): number[] {
   switch (format) {
@@ -136,6 +174,9 @@ export function validateConfig(config: RawConfig): Record<string, string> {
   }
   if (config.storageFormat === "mipi12" && config.width % 2 !== 0) {
     errors.width = "widthMultiple2";
+  }
+  if (!testPatternsFor(config.cfaPattern).includes(config.testPattern)) {
+    errors.testPattern = "patternCfaMismatch";
   }
   if (
     config.testPattern === "graySteps" &&
