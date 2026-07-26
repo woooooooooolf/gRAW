@@ -103,4 +103,4 @@ export type ThemeId =
   | "glacier"
   | "mist-violet"
   | "clear-sky";
-export type FontSize = "small" | "standard" | "large";
+export type FontSize = "standard" | "comfortable" | "large";

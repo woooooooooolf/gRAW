@@ -25,6 +25,7 @@ import {
   withStorageFormat,
 } from "./config";
 import { createTranslator } from "./i18n";
+import { FONT_SIZES, normalizeFontSize } from "./fontSize";
 import { calculateViewportScale } from "./viewport";
 import type {
   CfaPattern,
@@ -74,7 +75,7 @@ const testPatterns: TestPattern[] = [
   "black",
   "white",
 ];
-const fontSizes: FontSize[] = ["small", "standard", "large"];
+const fontSizes: readonly FontSize[] = FONT_SIZES;
 const themeOptions: {
   value: ThemeId;
   label: string;
@@ -98,11 +99,7 @@ function App() {
   const [config, setConfig] = useState<RawConfig>(DEFAULT_CONFIG);
   const [language, setLanguage] = useStoredState<Language>("graw-language", "zh-CN");
   const [theme, setTheme] = useThemePreference();
-  const [fontSize, setFontSize] = useStoredChoice<FontSize>(
-    "graw-font-size",
-    "standard",
-    fontSizes,
-  );
+  const [fontSize, setFontSize] = useStoredFontSize();
   const [aboutOpen, setAboutOpen] = useState(false);
   const [draftInvalid, setDraftInvalid] = useState<Record<string, true>>({});
   const [runState, setRunState] = useState<RunState>("idle");
@@ -664,12 +661,11 @@ function useThemePreference() {
   return [value, setValue] as const;
 }
 
-function useStoredChoice<T extends string>(key: string, fallback: T, allowed: readonly T[]) {
-  const [value, setValue] = useState<T>(() => {
-    const stored = localStorage.getItem(key) as T | null;
-    return stored && allowed.includes(stored) ? stored : fallback;
-  });
-  useEffect(() => localStorage.setItem(key, value), [key, value]);
+function useStoredFontSize() {
+  const [value, setValue] = useState<FontSize>(() =>
+    normalizeFontSize(localStorage.getItem("graw-font-size")),
+  );
+  useEffect(() => localStorage.setItem("graw-font-size", value), [value]);
   return [value, setValue] as const;
 }
 

@@ -1095,6 +1095,7 @@ select:disabled {
   --compact-width: 860px;
   --compact-height: 600px;
   --viewport-scale: 1;
+  --text-scale: 1;
 }
 
 body {
@@ -1256,16 +1257,12 @@ body {
   --radius: 9px;
 }
 
-:root[data-font-size="small"] .app-shell {
-  width: 106.383%;
-  height: 106.383%;
-  zoom: 0.94;
+:root[data-font-size="comfortable"] {
+  --text-scale: 1.1;
 }
 
-:root[data-font-size="large"] .app-shell {
-  width: 92.593%;
-  height: 92.593%;
-  zoom: 1.08;
+:root[data-font-size="large"] {
+  --text-scale: 1.2;
 }
 
 .app-shell {
@@ -1472,8 +1469,8 @@ body {
   font-family: Georgia, serif;
 }
 
-.font-sample.small { font-size: 12px; }
-.font-sample.standard { font-size: 15px; }
+.font-sample.standard { font-size: 14px; }
+.font-sample.comfortable { font-size: 16px; }
 .font-sample.large { font-size: 18px; }
 
 .workspace {
@@ -1928,6 +1925,100 @@ body {
   color: var(--accent-bright);
 }
 
-:root[data-font-size="large"] .workspace {
-  overflow: auto;
+/* Reading-size preferences affect typography only. Window geometry has one scale source. */
+.simple-option-list button span,
+.menu-section-title,
+.theme-grid button,
+.font-options button {
+  font-size: calc(8px * var(--text-scale));
+}
+
+.simple-option-list button strong,
+.generate-button,
+.cancel-button,
+.secondary-button,
+.license-entry strong {
+  font-size: calc(10px * var(--text-scale));
+}
+
+.card-heading h2 {
+  font-size: calc(12px * var(--text-scale));
+}
+
+.card-heading p,
+.format-note,
+.size-hero > span,
+.size-hero strong small,
+.status-copy small,
+.license-entry small,
+.license-entry-label,
+.license-view-header p,
+.license-view .license-row strong {
+  font-size: calc(8px * var(--text-scale));
+}
+
+.field > label {
+  font-size: calc(9px * var(--text-scale));
+  line-height: calc(12px * var(--text-scale));
+}
+
+.input-shell input,
+.select-shell select,
+.layout-empty,
+.about-facts strong {
+  font-size: calc(10px * var(--text-scale));
+}
+
+.input-suffix,
+.pattern-banner span,
+.back-button,
+.about-heading > div > span {
+  font-size: calc(9px * var(--text-scale));
+}
+
+.status-copy strong,
+.about-description {
+  font-size: calc(11px * var(--text-scale));
+}
+
+.field-message,
+.cfa-cell,
+.cfa-origin,
+.fill-field > code,
+.file-segment,
+.progress-meta,
+.license-view .license-row span,
+.license-view .license-row small,
+.license-view .license-row code {
+  font-size: calc(7px * var(--text-scale));
+}
+
+.file-segment small,
+.metric span,
+.metric small {
+  font-size: calc(6px * var(--text-scale));
+}
+
+.size-hero strong {
+  font-size: calc(14px * var(--text-scale));
+}
+
+.metric strong {
+  font-size: calc(9px * var(--text-scale));
+}
+
+.about-heading h2 {
+  font-size: calc(27px * var(--text-scale));
+}
+
+.about-heading p {
+  font-size: calc(12px * var(--text-scale));
+}
+
+.about-facts span {
+  font-size: calc(8px * var(--text-scale));
+}
+
+.license-view-header h2 {
+  font-size: calc(15px * var(--text-scale));
 }
