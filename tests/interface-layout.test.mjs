@@ -21,3 +21,14 @@ test("generated-size secondary value remains comfortably legible", () => {
   assert.match(appStyles, /\.size-hero strong small\s*\{[^}]*font-size:\s*calc\(11px \* var\(--text-scale\)\)/s);
   assert.match(appStyles, /\.size-hero strong\s*\{[^}]*font-size:\s*calc\(15px \* var\(--text-scale\)\)/s);
 });
+
+test("generated metrics remain on one row at larger reading sizes", () => {
+  assert.doesNotMatch(
+    appStyles,
+    /\.metrics-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,/s,
+  );
+  assert.match(
+    appStyles,
+    /\.metrics-grid\s*\{[^}]*grid-template-columns:\s*repeat\(4,/s,
+  );
+});
