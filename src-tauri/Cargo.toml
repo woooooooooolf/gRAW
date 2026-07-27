@@ -1,6 +1,6 @@
 [package]
 name = "graw"
-version = "0.0.5"
+version = "0.0.6"
 description = "gRAW - Bayer RAW test image generator"
 authors = ["Lingjing Qinghe", "OpenAI Codex"]
 edition = "2024"
