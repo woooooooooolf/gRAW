@@ -46,10 +46,21 @@ pub enum TestPattern {
     VerticalGradient,
     GraySteps,
     ColorBars,
+    ColorGradient,
+    RgbGradient,
     Checkerboard,
     RandomNoise,
     Black,
     White,
+}
+
+impl TestPattern {
+    fn requires_color_cfa(self) -> bool {
+        matches!(
+            self,
+            Self::ColorBars | Self::ColorGradient | Self::RgbGradient
+        )
+    }
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
@@ -141,8 +152,8 @@ impl RawConfig {
             _ => {}
         }
 
-        if self.cfa_pattern == CfaPattern::Mono && self.test_pattern == TestPattern::ColorBars {
-            return Err("Mono CFA 不支持彩条测试图案".into());
+        if self.cfa_pattern == CfaPattern::Mono && self.test_pattern.requires_color_cfa() {
+            return Err("Mono CFA 不支持彩色测试图案".into());
         }
         if self.test_pattern == TestPattern::GraySteps && !(2..=256).contains(&self.gray_steps) {
             return Err("灰阶数量必须在 2 到 256 之间".into());
@@ -264,10 +275,16 @@ mod tests {
     }
 
     #[test]
-    fn rejects_color_bars_for_mono_cfa() {
-        let mut config = base_config();
-        config.cfa_pattern = CfaPattern::Mono;
-        config.test_pattern = TestPattern::ColorBars;
-        assert!(config.validate().unwrap_err().contains("Mono CFA"));
+    fn rejects_color_patterns_for_mono_cfa() {
+        for test_pattern in [
+            TestPattern::ColorBars,
+            TestPattern::ColorGradient,
+            TestPattern::RgbGradient,
+        ] {
+            let mut config = base_config();
+            config.cfa_pattern = CfaPattern::Mono;
+            config.test_pattern = test_pattern;
+            assert!(config.validate().unwrap_err().contains("Mono CFA"));
+        }
     }
 }

@@ -36,26 +36,54 @@ export const DEFAULT_CONFIG: RawConfig = {
 
 export const BIT_DEPTHS = Array.from({ length: 9 }, (_, index) => index + 8);
 
-export const TEST_PATTERNS: readonly TestPattern[] = [
+export const MONOCHROME_TEST_PATTERNS: readonly TestPattern[] = [
   "fixed",
   "horizontalGradient",
   "verticalGradient",
   "graySteps",
-  "colorBars",
   "checkerboard",
   "randomNoise",
   "black",
   "white",
 ];
 
-const MONO_TEST_PATTERNS = TEST_PATTERNS.filter(
-  (pattern) => pattern !== "colorBars",
-);
+export const COLOR_TEST_PATTERNS: readonly TestPattern[] = [
+  "colorBars",
+  "colorGradient",
+  "rgbGradient",
+];
+
+export const TEST_PATTERNS: readonly TestPattern[] = [
+  ...MONOCHROME_TEST_PATTERNS,
+  ...COLOR_TEST_PATTERNS,
+];
+
+export interface TestPatternGroup {
+  id: "monochrome" | "color";
+  patterns: readonly TestPattern[];
+}
+
+const MONOCHROME_GROUP: TestPatternGroup = {
+  id: "monochrome",
+  patterns: MONOCHROME_TEST_PATTERNS,
+};
+const COLOR_GROUP: TestPatternGroup = {
+  id: "color",
+  patterns: COLOR_TEST_PATTERNS,
+};
+
+export function testPatternGroupsFor(
+  cfaPattern: CfaPattern,
+): readonly TestPatternGroup[] {
+  return cfaPattern === "mono"
+    ? [MONOCHROME_GROUP]
+    : [MONOCHROME_GROUP, COLOR_GROUP];
+}
 
 export function testPatternsFor(
   cfaPattern: CfaPattern,
 ): readonly TestPattern[] {
-  return cfaPattern === "mono" ? MONO_TEST_PATTERNS : TEST_PATTERNS;
+  return cfaPattern === "mono" ? MONOCHROME_TEST_PATTERNS : TEST_PATTERNS;
 }
 
 export function withCfaPattern(

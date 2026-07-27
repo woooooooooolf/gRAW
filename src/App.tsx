@@ -20,7 +20,7 @@ import {
   formatInteger,
   hexByte,
   maxValue,
-  testPatternsFor,
+  testPatternGroupsFor,
   validateConfig,
   withBitDepth,
   withCfaPattern,
@@ -264,7 +264,13 @@ function App() {
               <div className="pattern-controls">
                 <SelectField id="pattern" label={t("field.pattern")} value={config.testPattern}
                   onChange={(value) => update("testPattern", value as TestPattern)}
-                  options={testPatternsFor(config.cfaPattern).map((value) => ({ value, label: t(`pattern.${value}`) }))}
+                  optionGroups={testPatternGroupsFor(config.cfaPattern).map((group) => ({
+                    label: t(`patternGroup.${group.id}`),
+                    options: group.patterns.map((value) => ({
+                      value,
+                      label: t(`pattern.${value}`),
+                    })),
+                  }))}
                   error={errors.testPattern ? t(`error.${errors.testPattern}`) : undefined} />
                 {config.testPattern === "graySteps" && (
                   <NumberField id="gray-steps" label={t("field.graySteps")} value={config.graySteps}

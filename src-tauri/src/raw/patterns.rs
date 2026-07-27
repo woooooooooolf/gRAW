@@ -21,6 +21,10 @@ pub fn pixel_value(config: &RawConfig, frame: u32, x: u32, y: u32, max: u16) -> 
             ((step * max as u64) / (step_count - 1)) as u16
         }
         TestPattern::ColorBars => color_bar_value(channel, x, config.width, max),
+        TestPattern::ColorGradient => color_gradient_value(channel, x, config.width, max),
+        TestPattern::RgbGradient => {
+            rgb_gradient_value(channel, x, y, config.width, config.height, max)
+        }
         TestPattern::Checkerboard => {
             if ((x / config.checker_size) + (y / config.checker_size)) % 2 == 0 {
                 max
@@ -82,6 +86,46 @@ fn color_bar_value(channel: Channel, x: u32, width: u32, max: u16) -> u16 {
         Channel::B => blue,
     };
     if enabled { max } else { 0 }
+}
+
+fn color_gradient_value(channel: Channel, x: u32, width: u32, max: u16) -> u16 {
+    let max = max as u64;
+    let phase = if width <= 1 {
+        0
+    } else {
+        x as u64 * 6 * max / (width as u64 - 1)
+    };
+    let segment = (phase / max).min(5);
+    let offset = phase - segment * max;
+    let (red, green, blue) = match segment {
+        0 => (max, offset, 0),
+        1 => (max - offset, max, 0),
+        2 => (0, max, offset),
+        3 => (0, max - offset, max),
+        4 => (offset, 0, max),
+        _ => (max, 0, max - offset),
+    };
+    color_channel_value(channel, red as u16, green as u16, blue as u16)
+}
+
+fn rgb_gradient_value(channel: Channel, x: u32, y: u32, width: u32, height: u32, max: u16) -> u16 {
+    let intensity = scale_coordinate(x, width, max);
+    let band = ((y as u64 * 3) / height as u64).min(2);
+    let (red, green, blue) = match band {
+        0 => (intensity, 0, 0),
+        1 => (0, intensity, 0),
+        _ => (0, 0, intensity),
+    };
+    color_channel_value(channel, red, green, blue)
+}
+
+fn color_channel_value(channel: Channel, red: u16, green: u16, blue: u16) -> u16 {
+    match channel {
+        Channel::Mono => red.max(green).max(blue),
+        Channel::R => red,
+        Channel::Gr | Channel::Gb => green,
+        Channel::B => blue,
+    }
 }
 
 fn channel_at(cfa: CfaPattern, x: u32, y: u32) -> Channel {
@@ -194,5 +238,32 @@ mod tests {
         let first = pixel_value(&config, 0, 3, 4, 1023);
         assert_eq!(first, pixel_value(&config, 0, 3, 4, 1023));
         assert_ne!(first, pixel_value(&config, 1, 3, 4, 1023));
+    }
+
+    #[test]
+    fn generates_color_gradient_hue_anchors() {
+        let expected = [
+            (600, 0, 0),
+            (600, 600, 0),
+            (0, 600, 0),
+            (0, 600, 600),
+            (0, 0, 600),
+            (600, 0, 600),
+            (600, 0, 0),
+        ];
+        for (x, (red, green, blue)) in expected.into_iter().enumerate() {
+            assert_eq!(color_gradient_value(Channel::R, x as u32, 7, 600), red);
+            assert_eq!(color_gradient_value(Channel::Gr, x as u32, 7, 600), green);
+            assert_eq!(color_gradient_value(Channel::B, x as u32, 7, 600), blue);
+        }
+    }
+
+    #[test]
+    fn generates_separate_rgb_gradient_bands() {
+        assert_eq!(rgb_gradient_value(Channel::R, 4, 0, 5, 9, 1023), 1023);
+        assert_eq!(rgb_gradient_value(Channel::Gr, 4, 0, 5, 9, 1023), 0);
+        assert_eq!(rgb_gradient_value(Channel::R, 4, 3, 5, 9, 1023), 0);
+        assert_eq!(rgb_gradient_value(Channel::Gb, 4, 3, 5, 9, 1023), 1023);
+        assert_eq!(rgb_gradient_value(Channel::B, 4, 6, 5, 9, 1023), 1023);
     }
 }

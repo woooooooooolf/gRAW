@@ -4,12 +4,21 @@ import test from "node:test";
 
 const appSource = readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
 const appStyles = readFileSync(new URL("../src/App.css", import.meta.url), "utf8");
+const formControlsSource = readFileSync(
+  new URL("../src/components/FormControls.tsx", import.meta.url),
+  "utf8",
+);
 
 test("test-pattern preview has no visible label or shadow overlay", () => {
   assert.doesNotMatch(appStyles, /\.pattern-banner::after/);
   assert.doesNotMatch(appStyles, /\.pattern-banner\s+span/);
   assert.match(appStyles, /\.pattern-banner\s*\{[^}]*box-shadow:\s*none/s);
   assert.match(appSource, /role="img" aria-label=/);
+});
+
+test("test-pattern menu renders native option groups", () => {
+  assert.match(appSource, /optionGroups=\{testPatternGroupsFor/);
+  assert.match(formControlsSource, /<optgroup key=/);
 });
 
 test("compact workspace reserves additional height for storage controls", () => {

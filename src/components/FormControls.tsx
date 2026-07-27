@@ -121,12 +121,23 @@ export function NumberField({
   );
 }
 
+interface SelectOption {
+  value: string | number;
+  label: string;
+}
+
+interface SelectOptionGroup {
+  label: string;
+  options: SelectOption[];
+}
+
 interface SelectFieldProps {
   id: string;
   label: string;
   value: string | number;
   onChange: (value: string) => void;
-  options: { value: string | number; label: string }[];
+  options?: SelectOption[];
+  optionGroups?: SelectOptionGroup[];
   disabled?: boolean;
   hint?: string;
   error?: string;
@@ -138,7 +149,8 @@ export function SelectField({
   label,
   value,
   onChange,
-  options,
+  options = [],
+  optionGroups = [],
   disabled,
   hint,
   error,
@@ -159,11 +171,21 @@ export function SelectField({
           disabled={disabled}
           onChange={(event) => onChange(event.currentTarget.value)}
         >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
+          {optionGroups.length > 0
+            ? optionGroups.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </optgroup>
+            ))
+            : options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
         </select>
         <span className="select-chevron">⌄</span>
       </div>

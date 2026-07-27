@@ -23,6 +23,8 @@ export type TestPattern =
   | "verticalGradient"
   | "graySteps"
   | "colorBars"
+  | "colorGradient"
+  | "rgbGradient"
   | "checkerboard"
   | "randomNoise"
   | "black"

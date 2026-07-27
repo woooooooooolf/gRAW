@@ -530,6 +530,8 @@ select:disabled {
 .pattern-verticalGradient { background: linear-gradient(#05090a, #f0f6f7); }
 .pattern-graySteps { background: linear-gradient(90deg, #080b0c 0 12.5%, #303738 12.5% 25%, #555e60 25% 37.5%, #778184 37.5% 50%, #9aa5a7 50% 62.5%, #bbc4c5 62.5% 75%, #d7dedf 75% 87.5%, #f7f9f9 87.5%); }
 .pattern-colorBars { background: linear-gradient(90deg, #fff 0 12.5%, #ffed55 12.5% 25%, #51e3df 25% 37.5%, #51d273 37.5% 50%, #d855d5 50% 62.5%, #e7505d 62.5% 75%, #527ee8 75% 87.5%, #050708 87.5%); }
+.pattern-colorGradient { background: linear-gradient(90deg, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); }
+.pattern-rgbGradient { background: linear-gradient(90deg, #000, #f00) top / 100% 33.333% no-repeat, linear-gradient(90deg, #000, #0f0) center / 100% 33.334% no-repeat, linear-gradient(90deg, #000, #00f) bottom / 100% 33.333% no-repeat; background-color: #000; }
 .pattern-checkerboard { background-color: #e3ebec; background-image: linear-gradient(45deg,#182124 25%,transparent 25%),linear-gradient(-45deg,#182124 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#182124 75%),linear-gradient(-45deg,transparent 75%,#182124 75%); background-size: 22px 22px; background-position: 0 0,0 11px,11px -11px,-11px 0; }
 .pattern-randomNoise { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
 .pattern-black { background: #030506; }
