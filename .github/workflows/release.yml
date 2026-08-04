@@ -1,0 +1,82 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version, e.g. v0.0.9"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and publish gRAW release
+    runs-on: windows-latest
+    timeout-minutes: 90
+
+    env:
+      VERSION: ${{ github.event.inputs.version || github.ref_name }}
+      ARTIFACT: gRAW-windows-x64-${{ github.event.inputs.version || github.ref_name }}.exe
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up stable Rust
+        shell: pwsh
+        run: |
+          rustup toolchain install stable --profile minimal --component rustfmt
+          rustup default stable
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Regenerate third-party license data
+        run: npm run licenses
+
+      - name: Build portable executable
+        run: npm run tauri build -- --no-bundle
+
+      - name: Stage release artifacts
+        shell: pwsh
+        run: |
+          $staging = Join-Path $env:RUNNER_TEMP "artifacts"
+          New-Item -ItemType Directory -Force -Path $staging | Out-Null
+          $exe = "src-tauri/target/release/graw.exe"
+          Copy-Item -LiteralPath $exe -Destination (Join-Path $staging $env:ARTIFACT)
+
+          $hash = (Get-FileHash -Algorithm SHA256 -Path (Join-Path $staging $env:ARTIFACT)).Hash.ToLower()
+          $shaFile = Join-Path $staging "$env:ARTIFACT.sha256"
+          [System.IO.File]::WriteAllText($shaFile, "$hash  $env:ARTIFACT`n")
+
+          Get-ChildItem -LiteralPath $staging | Select-Object Name, Length
+          Write-Output "ARTIFACTS_DIR=$staging" >> $env:GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: gRAW ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: false
+          files: |
+            ${{ env.ARTIFACTS_DIR }}/gRAW-windows-x64-${{ env.VERSION }}.exe
+            ${{ env.ARTIFACTS_DIR }}/gRAW-windows-x64-${{ env.VERSION }}.exe.sha256
