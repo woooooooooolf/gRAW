@@ -85,6 +85,9 @@ When a color pattern is active and the CFA is changed to Mono, gRAW automaticall
 5. Review the calculated layout and estimated output size.
 6. Choose an output path and generate the RAW file.
 
+> [!NOTE]
+> The executable is not code-signed, so Windows SmartScreen may show an "Unknown publisher" warning on first run — a common situation for personal tools. Verify the file against the shipped `.sha256` checksum (command below) before proceeding, then choose "More info → Run anyway" if needed.
+
 ### Run from source
 
 ```powershell

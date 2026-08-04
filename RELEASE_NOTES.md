@@ -27,6 +27,8 @@ gRAW 是一款面向 Windows 的便携式 Bayer RAW 测试图像生成器，用�
 - `gRAW-windows-x64-v0.0.9.exe`：便携式可执行文件，无需安装。
 - `gRAW-windows-x64-v0.0.9.exe.sha256`：SHA-256 校验文件。
 
+本发布未进行代码签名，Windows SmartScreen 首次运行时可能提示“未知发布者”，属个人工具分发的常见情况。建议先核对 SHA-256 校验文件，确认一致后再运行。
+
 校验方法（PowerShell）：
 
 ```powershell
