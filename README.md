@@ -6,9 +6,9 @@
 
 [English](./README.en.md) · **简体中文**
 
-[![CI](https://img.shields.io/badge/CI-%E5%B7%B2%E9%85%8D%E7%BD%AE-2088FF?style=flat-square&logo=githubactions&logoColor=white)](./.github/workflows/ci.yml)
+[![CI](https://github.com/woooooooooolf/gRAW/actions/workflows/ci.yml/badge.svg)](./.github/workflows/ci.yml)
 ![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Windows%20x64-0078D4?style=flat-square&logo=windows11&logoColor=white)
-![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.0.9-20B2AA?style=flat-square)
+![Release](https://img.shields.io/github/v/release/woooooooooolf/gRAW?style=flat-square)
 [![许可证](https://img.shields.io/badge/%E8%AE%B8%E5%8F%AF%E8%AF%81-MIT%20OR%20Apache--2.0-4C1?style=flat-square)](#许可证)
 ![Tauri](https://img.shields.io/badge/Tauri-2-FFC131?style=flat-square&logo=tauri&logoColor=111111)
 
@@ -88,7 +88,7 @@ gRAW 用于生成确定性的无文件头 RAW 测试图像，适合传感器图�
 ### 从源码运行
 
 ```powershell
-npm install
+npm ci
 npm run licenses
 npm run tauri dev
 ```
@@ -121,7 +121,7 @@ Get-FileHash -Algorithm SHA256 .\gRAW-windows-x64-v<版本>.exe
 - Rust 格式。
 - Rust 单元测试与集成测试。
 
-顶部徽章表示 CI 已完成配置。仓库绑定 GitHub 远端后，可以将其替换为对应仓库的实时工作流状态徽章。
+顶部徽章显示 CI 与最新发布状态。
 
 此外，[发布工作流](./.github/workflows/release.yml) 会在推送 `v*` 标签时自动构建便携版并创建 GitHub Release：产物按 `gRAW-windows-x64-v<版本>.exe` 命名并附带 SHA-256 校验文件，发布说明取自仓库根目录的 `RELEASE_NOTES.md`。
 

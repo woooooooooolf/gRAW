@@ -1,0 +1,45 @@
+name: 问题反馈
+description: 报告使用中遇到的问题
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: 请尽量提供完整信息，方便定位问题。
+  - type: input
+    id: version
+    attributes:
+      label: gRAW 版本
+      description: 发布页中的版本号，例如 v0.0.9
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: 系统环境
+      description: 例如 Windows 11 23H2 x64
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 从打开程序到出现问题的完整操作步骤。
+      placeholder: |
+        1. 打开 gRAW
+        2. 配置 ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 如有报错信息或截图，请一并提供。
+    validations:
+      required: true
