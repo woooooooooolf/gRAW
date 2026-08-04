@@ -9,6 +9,7 @@
 [![CI](https://img.shields.io/badge/CI-configured-2088FF?style=flat-square&logo=githubactions&logoColor=white)](./.github/workflows/ci.yml)
 ![Platform](https://img.shields.io/badge/platform-Windows%20x64-0078D4?style=flat-square&logo=windows11&logoColor=white)
 ![Release](https://img.shields.io/badge/release-v0.0.8-20B2AA?style=flat-square)
+[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-4C1?style=flat-square)](#license)
 ![Tauri](https://img.shields.io/badge/Tauri-2-FFC131?style=flat-square&logo=tauri&logoColor=111111)
 
 </div>
@@ -141,6 +142,11 @@ gRAW/
 └─ release/             Local portable release artifacts (Git-ignored)
 ```
 
-## License status
+## License
 
-This repository does not currently include a project-level open-source license. Third-party component licenses are generated from the dependency graph and are available in the application's About dialog.
+gRAW is dual-licensed under either of the following licenses, at your option:
+
+- [Apache License, Version 2.0](./LICENSE-APACHE)
+- [MIT License](./LICENSE-MIT)
+
+The SPDX expression is `MIT OR Apache-2.0`. Third-party component licenses are generated from the dependency graph and remain available in the application's About dialog.

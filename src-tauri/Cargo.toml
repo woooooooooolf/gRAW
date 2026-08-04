@@ -3,6 +3,7 @@ name = "graw"
 version = "0.0.8"
 description = "gRAW - Bayer RAW test image generator"
 authors = ["Lingjing Qinghe", "OpenAI Codex"]
+license = "MIT OR Apache-2.0"
 edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

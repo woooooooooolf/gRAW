@@ -9,6 +9,7 @@
 [![CI](https://img.shields.io/badge/CI-%E5%B7%B2%E9%85%8D%E7%BD%AE-2088FF?style=flat-square&logo=githubactions&logoColor=white)](./.github/workflows/ci.yml)
 ![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Windows%20x64-0078D4?style=flat-square&logo=windows11&logoColor=white)
 ![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.0.8-20B2AA?style=flat-square)
+[![许可证](https://img.shields.io/badge/%E8%AE%B8%E5%8F%AF%E8%AF%81-MIT%20OR%20Apache--2.0-4C1?style=flat-square)](#许可证)
 ![Tauri](https://img.shields.io/badge/Tauri-2-FFC131?style=flat-square&logo=tauri&logoColor=111111)
 
 </div>
@@ -141,6 +142,11 @@ gRAW/
 └─ release/             本地便携版产物（Git 忽略）
 ```
 
-## 许可证状态
+## 许可证
 
-当前仓库尚未包含项目级开源许可证。第三方组件许可证根据依赖关系生成，可在应用程序的“关于”对话框中查看。
+gRAW 采用双许可证，使用者可以任选以下一种许可证：
+
+- [Apache License, Version 2.0](./LICENSE-APACHE)
+- [MIT License](./LICENSE-MIT)
+
+对应的 SPDX 表达式为 `MIT OR Apache-2.0`。第三方组件许可证仍根据依赖关系生成，可在应用程序的“关于”对话框中查看。
