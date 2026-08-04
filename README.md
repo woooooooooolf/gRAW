@@ -8,7 +8,7 @@
 
 [![CI](https://img.shields.io/badge/CI-configured-2088FF?style=flat-square&logo=githubactions&logoColor=white)](./.github/workflows/ci.yml)
 ![Platform](https://img.shields.io/badge/platform-Windows%20x64-0078D4?style=flat-square&logo=windows11&logoColor=white)
-![Release](https://img.shields.io/badge/release-v0.0.8-20B2AA?style=flat-square)
+![Release](https://img.shields.io/badge/release-v0.0.9-20B2AA?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-4C1?style=flat-square)](#license)
 ![Tauri](https://img.shields.io/badge/Tauri-2-FFC131?style=flat-square&logo=tauri&logoColor=111111)
 
