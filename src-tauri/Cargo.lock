@@ -1353,7 +1353,7 @@ dependencies = [
 
 [[package]]
 name = "graw"
-version = "0.0.7"
+version = "0.0.8"
 dependencies = [
  "fs2",
  "serde",
