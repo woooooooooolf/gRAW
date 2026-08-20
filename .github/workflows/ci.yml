@@ -36,11 +36,14 @@ jobs:
       - name: Set up stable Rust
         shell: pwsh
         run: |
-          rustup toolchain install stable --profile minimal --component rustfmt
+          rustup toolchain install stable --profile minimal --component rustfmt --component clippy
           rustup default stable
 
       - name: Install frontend dependencies
         run: npm ci
+
+      - name: Check third-party license data
+        run: npm run licenses:check
 
       - name: Run frontend tests
         run: npm run test:frontend
@@ -50,6 +53,9 @@ jobs:
 
       - name: Check Rust formatting
         run: cargo fmt --manifest-path src-tauri/Cargo.toml -- --check
+
+      - name: Lint Rust code
+        run: cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets --all-features -- -D warnings
 
       - name: Run Rust tests
         run: cargo test --manifest-path src-tauri/Cargo.toml

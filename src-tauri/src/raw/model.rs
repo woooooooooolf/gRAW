@@ -1,5 +1,11 @@
 use serde::{Deserialize, Serialize};
 
+const MAX_DIMENSION: u32 = 1_000_000;
+const MAX_FRAME_COUNT: u32 = 1_000_000;
+const MAX_ROW_ALIGNMENT: u32 = 1_048_576;
+const MAX_FRAME_ALIGNMENT: u32 = 1_073_741_824;
+const MAX_SAFE_INTEGER: u64 = 9_007_199_254_740_991;
+
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub enum StorageFormat {
@@ -115,11 +121,29 @@ impl RawConfig {
         if self.width == 0 || self.height == 0 {
             return Err("图像宽度和高度必须大于 0".into());
         }
+        if self.width > MAX_DIMENSION || self.height > MAX_DIMENSION {
+            return Err(format!("图像宽度和高度不能超过 {MAX_DIMENSION}"));
+        }
         if self.frame_count == 0 {
             return Err("帧数量必须大于 0".into());
         }
+        if self.frame_count > MAX_FRAME_COUNT {
+            return Err(format!("帧数量不能超过 {MAX_FRAME_COUNT}"));
+        }
         if self.row_alignment == 0 || self.frame_alignment == 0 {
             return Err("行对齐和帧对齐必须大于 0".into());
+        }
+        if self.row_alignment > MAX_ROW_ALIGNMENT {
+            return Err(format!("行对齐不能超过 {MAX_ROW_ALIGNMENT} 字节"));
+        }
+        if self.frame_alignment > MAX_FRAME_ALIGNMENT {
+            return Err(format!("帧对齐不能超过 {MAX_FRAME_ALIGNMENT} 字节"));
+        }
+        if self.file_offset > MAX_SAFE_INTEGER {
+            return Err("文件起始偏移超过前端可精确表示的范围".into());
+        }
+        if self.test_pattern == TestPattern::RandomNoise && self.noise_seed > MAX_SAFE_INTEGER {
+            return Err("随机种子超过前端可精确表示的范围".into());
         }
         if !(8..=16).contains(&self.bit_depth) {
             return Err("位深必须在 8 到 16 bit 之间".into());
@@ -143,10 +167,10 @@ impl RawConfig {
         }
 
         match self.storage_format {
-            StorageFormat::Mipi10 | StorageFormat::Mipi14 if self.width % 4 != 0 => {
+            StorageFormat::Mipi10 | StorageFormat::Mipi14 if !self.width.is_multiple_of(4) => {
                 return Err("MIPI10/MIPI14 的宽度必须是 4 的倍数".into());
             }
-            StorageFormat::Mipi12 if self.width % 2 != 0 => {
+            StorageFormat::Mipi12 if !self.width.is_multiple_of(2) => {
                 return Err("MIPI12 的宽度必须是 2 的倍数".into());
             }
             _ => {}
@@ -286,5 +310,33 @@ mod tests {
             config.test_pattern = test_pattern;
             assert!(config.validate().unwrap_err().contains("Mono CFA"));
         }
+    }
+
+    #[test]
+    fn rejects_values_above_frontend_resource_limits() {
+        let mut config = base_config();
+        config.width = MAX_DIMENSION + 1;
+        assert!(config.validate().unwrap_err().contains("宽度和高度"));
+
+        let mut config = base_config();
+        config.frame_count = MAX_FRAME_COUNT + 1;
+        assert!(config.validate().unwrap_err().contains("帧数量"));
+
+        let mut config = base_config();
+        config.row_alignment = MAX_ROW_ALIGNMENT + 1;
+        assert!(config.validate().unwrap_err().contains("行对齐"));
+
+        let mut config = base_config();
+        config.frame_alignment = MAX_FRAME_ALIGNMENT + 1;
+        assert!(config.validate().unwrap_err().contains("帧对齐"));
+
+        let mut config = base_config();
+        config.file_offset = MAX_SAFE_INTEGER + 1;
+        assert!(config.validate().unwrap_err().contains("文件起始偏移"));
+
+        let mut config = base_config();
+        config.test_pattern = TestPattern::RandomNoise;
+        config.noise_seed = MAX_SAFE_INTEGER + 1;
+        assert!(config.validate().unwrap_err().contains("随机种子"));
     }
 }

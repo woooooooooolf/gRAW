@@ -66,6 +66,7 @@ export function NumberField({
   const [draft, setDraft] = useState(() => String(value));
   const [editing, setEditing] = useState(false);
   const empty = draft.length === 0;
+  const numericDraft = Number(draft);
 
   useEffect(() => {
     if (!editing) setDraft(String(value));
@@ -110,7 +111,9 @@ export function NumberField({
           aria-invalid={empty || Boolean(errorCode)}
           aria-valuemin={min}
           aria-valuemax={max}
-          aria-valuenow={empty ? undefined : Number(draft)}
+          aria-valuenow={
+            empty || !Number.isFinite(numericDraft) ? undefined : numericDraft
+          }
           onFocus={() => setEditing(true)}
           onBlur={() => setEditing(false)}
           onChange={(event) => handleChange(event.currentTarget.value)}

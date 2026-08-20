@@ -14,6 +14,7 @@ import { revealItemInDir } from "@tauri-apps/plugin-opener";
 import {
   bitDepthsFor,
   calculateLayout,
+  CONFIG_LIMITS,
   DEFAULT_CONFIG,
   formatBytes,
   formatDuration,
@@ -67,6 +68,8 @@ const cfaPatterns: CfaPattern[] = [
   "quadBggr",
 ];
 const fontSizes: readonly FontSize[] = FONT_SIZES;
+const languages: readonly Language[] = ["zh-CN", "en-US"];
+const GENERATION_CANCELLED_ERROR = "generation_cancelled";
 const themeOptions: {
   value: ThemeId;
   label: string;
@@ -88,11 +91,16 @@ type ToolbarPanel = "language" | "theme" | "font" | null;
 
 function App() {
   const [config, setConfig] = useState<RawConfig>(DEFAULT_CONFIG);
-  const [language, setLanguage] = useStoredState<Language>("graw-language", "zh-CN");
+  const [language, setLanguage] = useStoredState<Language>(
+    "graw-language",
+    "zh-CN",
+    languages,
+  );
   const [theme, setTheme] = useThemePreference();
   const [fontSize, setFontSize] = useStoredFontSize();
   const [aboutOpen, setAboutOpen] = useState(false);
   const [draftInvalid, setDraftInvalid] = useState<Record<string, true>>({});
+  const [selectingOutput, setSelectingOutput] = useState(false);
   const [runState, setRunState] = useState<RunState>("idle");
   const [progress, setProgress] = useState<GenerationProgress | null>(null);
   const [result, setResult] = useState<GenerationResult | null>(null);
@@ -108,6 +116,7 @@ function App() {
   );
   const maximum = maxValue(config.bitDepth);
   const busy = runState === "generating";
+  const interactionLocked = selectingOutput || busy;
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -118,13 +127,22 @@ function App() {
   }, [fontSize, language, theme, t]);
 
   useEffect(() => {
+    let disposed = false;
     let unlisten: (() => void) | undefined;
-    listen<GenerationProgress>("generation-progress", (event) => {
-      setProgress(event.payload);
-    }).then((dispose) => {
-      unlisten = dispose;
-    });
-    return () => unlisten?.();
+    void listen<GenerationProgress>("generation-progress", (event) => {
+      if (!disposed) setProgress(event.payload);
+    })
+      .then((dispose) => {
+        if (disposed) dispose();
+        else unlisten = dispose;
+      })
+      .catch((error) => {
+        if (!disposed) setRuntimeError(String(error));
+      });
+    return () => {
+      disposed = true;
+      unlisten?.();
+    };
   }, []);
 
   const setDraftValidity = useCallback((id: string, invalid: boolean) => {
@@ -139,7 +157,10 @@ function App() {
   }, []);
 
   function resetRunFeedback() {
-    if (runState !== "generating") setRunState("idle");
+    if (runState !== "generating") {
+      setRunState("idle");
+      setProgress(null);
+    }
     setRuntimeError("");
     setResult(null);
   }
@@ -163,9 +184,12 @@ function App() {
   }
 
   async function generate() {
-    if (!valid || busy) return;
+    if (!valid || interactionLocked) return;
+    setSelectingOutput(true);
+    setRunState("idle");
     setRuntimeError("");
     setResult(null);
+    setProgress(null);
     try {
       await invoke<FrameLayout>("calculate_layout", { config });
       let outputPath = await save({
@@ -192,16 +216,30 @@ function App() {
       setRunState("completed");
     } catch (error) {
       const message = String(error);
-      if (message.includes("已取消生成")) setRunState("cancelled");
+      if (message === GENERATION_CANCELLED_ERROR) setRunState("cancelled");
       else {
         setRuntimeError(message);
         setRunState("failed");
       }
+    } finally {
+      setSelectingOutput(false);
     }
   }
 
   async function cancel() {
-    await invoke("cancel_generation");
+    try {
+      await invoke("cancel_generation");
+    } catch (error) {
+      setRuntimeError(String(error));
+    }
+  }
+
+  async function revealOutput(outputPath: string) {
+    try {
+      await revealItemInDir(outputPath);
+    } catch (error) {
+      setRuntimeError(String(error));
+    }
   }
 
   const firstError = hasDraftError ? "required" : Object.values(errors)[0];
@@ -237,17 +275,21 @@ function App() {
         t={t}
       />
 
-      <main className="workspace">
+      <main
+        className="workspace"
+        aria-busy={interactionLocked}
+        inert={interactionLocked}
+      >
         <div className="workspace-grid">
           <Card title={t("section.image")} hint={t("section.imageHint")} className="image-card">
             <div className="card-split">
               <div className="form-grid compact">
                 <NumberField id="width" label={t("field.width")} value={config.width}
                   onChange={(value) => update("width", value)} errorCode={errors.width}
-                  min={1} suffix="px" {...numberFieldProps} />
+                  min={1} max={CONFIG_LIMITS.dimension} suffix="px" {...numberFieldProps} />
                 <NumberField id="height" label={t("field.height")} value={config.height}
                   onChange={(value) => update("height", value)} errorCode={errors.height}
-                  min={1} suffix="px" {...numberFieldProps} />
+                  min={1} max={CONFIG_LIMITS.dimension} suffix="px" {...numberFieldProps} />
                 <SelectField id="cfa" label={t("field.cfa")} value={config.cfaPattern}
                   onChange={(value) => transformConfig((current) => withCfaPattern(current, value as CfaPattern))}
                   options={cfaPatterns.map((value) => ({ value, label: cfaLabel(value) }))}
@@ -280,11 +322,12 @@ function App() {
                 {config.testPattern === "checkerboard" && (
                   <NumberField id="checker-size" label={t("field.checkerSize")} value={config.checkerSize}
                     onChange={(value) => update("checkerSize", value)} errorCode={errors.checkerSize}
-                    min={1} suffix="px" {...numberFieldProps} />
+                    min={1} max={CONFIG_LIMITS.checkerSize} suffix="px" {...numberFieldProps} />
                 )}
                 {config.testPattern === "randomNoise" && (
                   <NumberField id="noise-seed" label={t("field.noiseSeed")} value={config.noiseSeed}
-                    onChange={(value) => update("noiseSeed", value)} min={0} {...numberFieldProps} />
+                    onChange={(value) => update("noiseSeed", value)} errorCode={errors.noiseSeed}
+                    min={0} max={CONFIG_LIMITS.noiseSeed} {...numberFieldProps} />
                 )}
               </div>
             </div>
@@ -346,16 +389,16 @@ function App() {
             <div className="file-grid">
               <NumberField id="frames" label={t("field.frameCount")} value={config.frameCount}
                 onChange={(value) => update("frameCount", value)} errorCode={errors.frameCount}
-                min={1} {...numberFieldProps} />
+                min={1} max={CONFIG_LIMITS.frameCount} {...numberFieldProps} />
               <NumberField id="offset" label={t("field.fileOffset")} value={config.fileOffset}
                 onChange={(value) => update("fileOffset", value)} errorCode={errors.fileOffset}
-                min={0} suffix="B" {...numberFieldProps} />
+                min={0} max={CONFIG_LIMITS.fileOffset} suffix="B" {...numberFieldProps} />
               <NumberField id="row-align" label={t("field.rowAlignment")} value={config.rowAlignment}
                 onChange={(value) => update("rowAlignment", value)} errorCode={errors.rowAlignment}
-                min={1} suffix="B" {...numberFieldProps} />
+                min={1} max={CONFIG_LIMITS.rowAlignment} suffix="B" {...numberFieldProps} />
               <NumberField id="frame-align" label={t("field.frameAlignment")} value={config.frameAlignment}
                 onChange={(value) => update("frameAlignment", value)} errorCode={errors.frameAlignment}
-                min={1} suffix="B" {...numberFieldProps} />
+                min={1} max={CONFIG_LIMITS.frameAlignment} suffix="B" {...numberFieldProps} />
             </div>
           </Card>
 
@@ -367,7 +410,11 @@ function App() {
 
       <footer className={`statusbar state-${runState}`}>
         <div className="status-copy">
-          <span className={`status-orb ${!valid || runState === "failed" ? "error" : ""}`} />
+          <span
+            className={`status-orb ${
+              !valid || runtimeError || runState === "failed" ? "error" : ""
+            }`}
+          />
           <div>
             <strong>{statusText}</strong>
             <small>
@@ -379,14 +426,14 @@ function App() {
         {busy && progress && <Progress progress={progress} t={t} locale={language} />}
         <div className="status-actions">
           {result && runState === "completed" && (
-            <button className="secondary-button" onClick={() => revealItemInDir(result.outputPath)}>
+            <button className="secondary-button" onClick={() => void revealOutput(result.outputPath)}>
               {t("action.reveal")}
             </button>
           )}
           {busy ? (
             <button className="cancel-button" onClick={cancel}>{t("action.cancel")}</button>
           ) : (
-            <button className="generate-button" disabled={!valid} onClick={generate}>
+            <button className="generate-button" disabled={!valid || selectingOutput} onClick={generate}>
               <span className="generate-icon">◇</span>{t("action.generate")}
             </button>
           )}
@@ -450,7 +497,7 @@ function HeaderToolbar({
         <ToolbarMenu label={t("header.language")} icon="language" open={panel === "language"}
           onToggle={() => setPanel(panel === "language" ? null : "language")}>
           <div className="simple-option-list">
-            {(["zh-CN", "en-US"] as Language[]).map((value) => (
+            {languages.map((value) => (
               <button key={value} className={language === value ? "selected" : ""}
                 onClick={() => choose(onLanguageChange, value)}>
                 <span>{value === "zh-CN" ? "中文" : "EN"}</span>
@@ -666,8 +713,16 @@ function useStoredFontSize() {
   return [value, setValue] as const;
 }
 
-function useStoredState<T extends string>(key: string, fallback: T) {
-  const [value, setValue] = useState<T>(() => (localStorage.getItem(key) as T) || fallback);
+function useStoredState<T extends string>(
+  key: string,
+  fallback: T,
+  allowed: readonly T[] = [],
+) {
+  const [value, setValue] = useState<T>(() => {
+    const stored = localStorage.getItem(key) as T | null;
+    if (!stored) return fallback;
+    return allowed.length === 0 || allowed.includes(stored) ? stored : fallback;
+  });
   useEffect(() => localStorage.setItem(key, value), [key, value]);
   return [value, setValue] as const;
 }

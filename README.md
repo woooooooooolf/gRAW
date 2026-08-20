@@ -102,9 +102,11 @@ npm run tauri dev
 
 | 命令 | 用途 |
 | --- | --- |
+| `npm run licenses:check` | 重新生成并检查第三方组件清单是否与锁文件一致 |
 | `npm run build` | 对 React 前端进行类型检查和生产构建 |
 | `npm run test:frontend` | 执行输入、窗口缩放、字号、CFA 和界面回归测试 |
 | `cargo fmt --manifest-path src-tauri/Cargo.toml -- --check` | 检查 Rust 代码格式 |
+| `cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets --all-features -- -D warnings` | 严格检查 Rust 代码质量 |
 | `cargo test --manifest-path src-tauri/Cargo.toml` | 执行 RAW 布局、打包、图案和生成器测试 |
 | `npm run tauri build -- --no-bundle` | 构建 Windows 便携版程序 |
 
@@ -120,8 +122,9 @@ Get-FileHash -Algorithm SHA256 .\gRAW-windows-x64-v<版本>.exe
 
 [GitHub Actions 工作流](./.github/workflows/ci.yml)会在推送、拉取请求和手动触发时运行，并安装 Node.js 与 Rust 后检查：
 
+- 第三方组件清单一致性。
 - 前端测试和生产构建。
-- Rust 格式。
+- Rust 格式与严格代码检查。
 - Rust 单元测试与集成测试。
 
 顶部徽章显示 CI 与最新发布状态。

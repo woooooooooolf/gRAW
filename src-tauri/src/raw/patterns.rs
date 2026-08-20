@@ -26,7 +26,7 @@ pub fn pixel_value(config: &RawConfig, frame: u32, x: u32, y: u32, max: u16) -> 
             rgb_gradient_value(channel, x, y, config.width, config.height, max)
         }
         TestPattern::Checkerboard => {
-            if ((x / config.checker_size) + (y / config.checker_size)) % 2 == 0 {
+            if ((x / config.checker_size) + (y / config.checker_size)).is_multiple_of(2) {
                 max
             } else {
                 0

@@ -102,9 +102,11 @@ npm run tauri dev
 
 | Command | Purpose |
 | --- | --- |
+| `npm run licenses:check` | Regenerate and verify that third-party component data matches the lockfiles |
 | `npm run build` | Type-check and build the React frontend |
 | `npm run test:frontend` | Run input, viewport, typography, CFA, and interface regression tests |
 | `cargo fmt --manifest-path src-tauri/Cargo.toml -- --check` | Verify Rust formatting |
+| `cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets --all-features -- -D warnings` | Run strict Rust lint checks |
 | `cargo test --manifest-path src-tauri/Cargo.toml` | Run RAW layout, packing, pattern, and generator tests |
 | `npm run tauri build -- --no-bundle` | Build the portable Windows executable |
 
@@ -120,8 +122,9 @@ Compare the printed hash with the content of the `.sha256` file to confirm file 
 
 The [GitHub Actions workflow](./.github/workflows/ci.yml) runs on pushes, pull requests, and manual dispatch. It installs Node.js and Rust, then verifies:
 
+- Third-party component data consistency.
 - Frontend tests and production build.
-- Rust formatting.
+- Rust formatting and strict lint checks.
 - Rust unit and integration tests.
 
 The badges above show the live CI and latest release status.

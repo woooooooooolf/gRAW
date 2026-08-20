@@ -21,9 +21,11 @@ npm run tauri dev
 
 改动涉及代码时，请确保以下检查通过：
 
+- `npm run licenses:check`：第三方组件清单与锁文件一致
 - `npm run test:frontend`：前端回归测试
 - `npm run build`：前端类型检查与生产构建
 - `cargo fmt --manifest-path src-tauri/Cargo.toml -- --check`：Rust 格式检查
+- `cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets --all-features -- -D warnings`：严格 Rust 代码检查
 - `cargo test --manifest-path src-tauri/Cargo.toml`：Rust 测试
 
 ## 发布流程

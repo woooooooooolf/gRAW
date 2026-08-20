@@ -34,6 +34,16 @@ export const DEFAULT_CONFIG: RawConfig = {
   frameCount: 1,
 };
 
+export const CONFIG_LIMITS = {
+  dimension: 1_000_000,
+  frameCount: 1_000_000,
+  rowAlignment: 1_048_576,
+  frameAlignment: 1_073_741_824,
+  fileOffset: Number.MAX_SAFE_INTEGER,
+  checkerSize: 0xffff_ffff,
+  noiseSeed: Number.MAX_SAFE_INTEGER,
+} as const;
+
 export const BIT_DEPTHS = Array.from({ length: 9 }, (_, index) => index + 8);
 
 export const MONOCHROME_TEST_PATTERNS: readonly TestPattern[] = [
@@ -183,12 +193,36 @@ export function calculateLayout(config: RawConfig): LocalLayout {
 
 export function validateConfig(config: RawConfig): Record<string, string> {
   const errors: Record<string, string> = {};
-  integerRange(errors, "width", config.width, 1, 1_000_000);
-  integerRange(errors, "height", config.height, 1, 1_000_000);
-  integerRange(errors, "frameCount", config.frameCount, 1, 1_000_000);
-  integerRange(errors, "rowAlignment", config.rowAlignment, 1, 1_048_576);
-  integerRange(errors, "frameAlignment", config.frameAlignment, 1, 1_073_741_824);
-  integerRange(errors, "fileOffset", config.fileOffset, 0, Number.MAX_SAFE_INTEGER);
+  integerRange(errors, "width", config.width, 1, CONFIG_LIMITS.dimension);
+  integerRange(errors, "height", config.height, 1, CONFIG_LIMITS.dimension);
+  integerRange(
+    errors,
+    "frameCount",
+    config.frameCount,
+    1,
+    CONFIG_LIMITS.frameCount,
+  );
+  integerRange(
+    errors,
+    "rowAlignment",
+    config.rowAlignment,
+    1,
+    CONFIG_LIMITS.rowAlignment,
+  );
+  integerRange(
+    errors,
+    "frameAlignment",
+    config.frameAlignment,
+    1,
+    CONFIG_LIMITS.frameAlignment,
+  );
+  integerRange(
+    errors,
+    "fileOffset",
+    config.fileOffset,
+    0,
+    CONFIG_LIMITS.fileOffset,
+  );
 
   if (!bitDepthsFor(config.storageFormat).includes(config.bitDepth)) {
     errors.bitDepth = "invalidDepth";
@@ -214,11 +248,23 @@ export function validateConfig(config: RawConfig): Record<string, string> {
   ) {
     errors.graySteps = "stepsRange";
   }
-  if (
-    config.testPattern === "checkerboard" &&
-    (!Number.isInteger(config.checkerSize) || config.checkerSize < 1)
-  ) {
-    errors.checkerSize = "positiveInteger";
+  if (config.testPattern === "checkerboard") {
+    integerRange(
+      errors,
+      "checkerSize",
+      config.checkerSize,
+      1,
+      CONFIG_LIMITS.checkerSize,
+    );
+  }
+  if (config.testPattern === "randomNoise") {
+    integerRange(
+      errors,
+      "noiseSeed",
+      config.noiseSeed,
+      0,
+      CONFIG_LIMITS.noiseSeed,
+    );
   }
 
   const maximum = maxValue(config.bitDepth);

@@ -1837,199 +1837,24 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "npm",
-    "name": "@babel/code-frame",
-    "version": "7.29.7",
+    "name": "@oxc-project/types",
+    "version": "0.142.0",
     "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-code-frame"
+    "homepage": "https://oxc.rs"
   },
   {
     "ecosystem": "npm",
-    "name": "@babel/compat-data",
-    "version": "7.29.7",
+    "name": "@rolldown/binding-win32-x64-msvc",
+    "version": "1.2.2",
     "license": "MIT",
-    "homepage": "https://github.com/babel/babel.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/core",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-core"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/generator",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-generator"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helper-compilation-targets",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://github.com/babel/babel.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helper-globals",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://github.com/babel/babel.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helper-module-imports",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-helper-module-imports"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helper-module-transforms",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-helper-module-transforms"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helper-plugin-utils",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-helper-plugin-utils"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helper-string-parser",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-helper-string-parser"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helper-validator-identifier",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://github.com/babel/babel.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helper-validator-option",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://github.com/babel/babel.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/helpers",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-helpers"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/parser",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-parser"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/plugin-transform-react-jsx-self",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-plugin-transform-react-jsx-self"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/plugin-transform-react-jsx-source",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-plugin-transform-react-jsx-source"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/template",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-template"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/traverse",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-traverse"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@babel/types",
-    "version": "7.29.7",
-    "license": "MIT",
-    "homepage": "https://babel.dev/docs/en/next/babel-types"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@esbuild/win32-x64",
-    "version": "0.28.1",
-    "license": "MIT",
-    "homepage": "git+https://github.com/evanw/esbuild.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@jridgewell/gen-mapping",
-    "version": "0.3.13",
-    "license": "MIT",
-    "homepage": "https://github.com/jridgewell/sourcemaps/tree/main/packages/gen-mapping"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@jridgewell/remapping",
-    "version": "2.3.5",
-    "license": "MIT",
-    "homepage": "https://github.com/jridgewell/sourcemaps/tree/main/packages/remapping"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@jridgewell/resolve-uri",
-    "version": "3.1.2",
-    "license": "MIT",
-    "homepage": "https://github.com/jridgewell/resolve-uri"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@jridgewell/sourcemap-codec",
-    "version": "1.5.5",
-    "license": "MIT",
-    "homepage": "https://github.com/jridgewell/sourcemaps/tree/main/packages/sourcemap-codec"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@jridgewell/trace-mapping",
-    "version": "0.3.31",
-    "license": "MIT",
-    "homepage": "https://github.com/jridgewell/sourcemaps/tree/main/packages/trace-mapping"
+    "homepage": "https://rolldown.rs/"
   },
   {
     "ecosystem": "npm",
     "name": "@rolldown/pluginutils",
-    "version": "1.0.0-beta.27",
+    "version": "1.0.1",
     "license": "MIT",
-    "homepage": "git+https://github.com/rolldown/rolldown.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@rollup/rollup-win32-x64-gnu",
-    "version": "4.62.2",
-    "license": "MIT",
-    "homepage": "https://rollupjs.org/"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@rollup/rollup-win32-x64-msvc",
-    "version": "4.62.2",
-    "license": "MIT",
-    "homepage": "https://rollupjs.org/"
+    "homepage": "https://github.com/rolldown/plugins/tree/main/packages/pluginutils#readme"
   },
   {
     "ecosystem": "npm",
@@ -2068,87 +1893,31 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "npm",
-    "name": "@types/babel__core",
-    "version": "7.20.5",
-    "license": "MIT",
-    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__core"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@types/babel__generator",
-    "version": "7.27.0",
-    "license": "MIT",
-    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__generator"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@types/babel__template",
-    "version": "7.4.4",
-    "license": "MIT",
-    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__template"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@types/babel__traverse",
-    "version": "7.28.0",
-    "license": "MIT",
-    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__traverse"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "@types/estree",
-    "version": "1.0.9",
-    "license": "MIT",
-    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree"
-  },
-  {
-    "ecosystem": "npm",
     "name": "@types/react",
-    "version": "19.2.17",
+    "version": "19.2.18",
     "license": "MIT",
     "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react"
   },
   {
     "ecosystem": "npm",
     "name": "@types/react-dom",
-    "version": "19.2.3",
+    "version": "19.2.4",
     "license": "MIT",
     "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-dom"
   },
   {
     "ecosystem": "npm",
+    "name": "@typescript/typescript-win32-x64",
+    "version": "7.0.2",
+    "license": "Apache-2.0",
+    "homepage": "https://www.typescriptlang.org/"
+  },
+  {
+    "ecosystem": "npm",
     "name": "@vitejs/plugin-react",
-    "version": "4.7.0",
+    "version": "6.0.5",
     "license": "MIT",
     "homepage": "https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#readme"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "baseline-browser-mapping",
-    "version": "2.11.1",
-    "license": "Apache-2.0",
-    "homepage": "git+https://github.com/web-platform-dx/baseline-browser-mapping.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "browserslist",
-    "version": "4.28.7",
-    "license": "MIT",
-    "homepage": "browserslist/browserslist"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "caniuse-lite",
-    "version": "1.0.30001806",
-    "license": "CC-BY-4.0",
-    "homepage": "browserslist/caniuse-lite"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "convert-source-map",
-    "version": "2.0.0",
-    "license": "MIT",
-    "homepage": "https://github.com/thlorenz/convert-source-map"
   },
   {
     "ecosystem": "npm",
@@ -2159,31 +1928,10 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "npm",
-    "name": "debug",
-    "version": "4.4.3",
-    "license": "MIT",
-    "homepage": "git://github.com/debug-js/debug.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "electron-to-chromium",
-    "version": "1.5.396",
-    "license": "ISC",
-    "homepage": "git+https://github.com/Kilian/electron-to-chromium.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "esbuild",
-    "version": "0.28.1",
-    "license": "MIT",
-    "homepage": "git+https://github.com/evanw/esbuild.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "escalade",
-    "version": "3.2.0",
-    "license": "MIT",
-    "homepage": "lukeed/escalade"
+    "name": "detect-libc",
+    "version": "2.1.2",
+    "license": "Apache-2.0",
+    "homepage": "git://github.com/lovell/detect-libc.git"
   },
   {
     "ecosystem": "npm",
@@ -2194,59 +1942,24 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "npm",
-    "name": "gensync",
-    "version": "1.0.0-beta.2",
-    "license": "MIT",
-    "homepage": "https://github.com/loganfsmyth/gensync"
+    "name": "lightningcss",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "homepage": "https://github.com/parcel-bundler/lightningcss.git"
   },
   {
     "ecosystem": "npm",
-    "name": "js-tokens",
-    "version": "4.0.0",
-    "license": "MIT",
-    "homepage": "lydell/js-tokens"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "jsesc",
-    "version": "3.1.0",
-    "license": "MIT",
-    "homepage": "https://mths.be/jsesc"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "json5",
-    "version": "2.2.3",
-    "license": "MIT",
-    "homepage": "http://json5.org/"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "lru-cache",
-    "version": "5.1.1",
-    "license": "ISC",
-    "homepage": "git://github.com/isaacs/node-lru-cache.git"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "ms",
-    "version": "2.1.3",
-    "license": "MIT",
-    "homepage": "vercel/ms"
+    "name": "lightningcss-win32-x64-msvc",
+    "version": "1.33.0",
+    "license": "MPL-2.0",
+    "homepage": "https://github.com/parcel-bundler/lightningcss.git"
   },
   {
     "ecosystem": "npm",
     "name": "nanoid",
-    "version": "3.3.16",
+    "version": "3.3.18",
     "license": "MIT",
     "homepage": "ai/nanoid"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "node-releases",
-    "version": "2.0.51",
-    "license": "MIT",
-    "homepage": "https://github.com/chicoxyzzy/node-releases.git"
   },
   {
     "ecosystem": "npm",
@@ -2265,7 +1978,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "postcss",
-    "version": "8.5.23",
+    "version": "8.5.26",
     "license": "MIT",
     "homepage": "https://postcss.org/"
   },
@@ -2285,17 +1998,10 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "npm",
-    "name": "react-refresh",
-    "version": "0.17.0",
+    "name": "rolldown",
+    "version": "1.2.2",
     "license": "MIT",
-    "homepage": "https://react.dev/"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "rollup",
-    "version": "4.62.2",
-    "license": "MIT",
-    "homepage": "https://rollupjs.org/"
+    "homepage": "https://rolldown.rs/"
   },
   {
     "ecosystem": "npm",
@@ -2303,13 +2009,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "version": "0.27.0",
     "license": "MIT",
     "homepage": "https://react.dev/"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "semver",
-    "version": "6.3.1",
-    "license": "ISC",
-    "homepage": "https://github.com/npm/node-semver.git"
   },
   {
     "ecosystem": "npm",
@@ -2328,29 +2027,15 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "typescript",
-    "version": "5.8.3",
+    "version": "7.0.2",
     "license": "Apache-2.0",
     "homepage": "https://www.typescriptlang.org/"
   },
   {
     "ecosystem": "npm",
-    "name": "update-browserslist-db",
-    "version": "1.2.3",
-    "license": "MIT",
-    "homepage": "browserslist/update-db"
-  },
-  {
-    "ecosystem": "npm",
     "name": "vite",
-    "version": "7.3.6",
+    "version": "8.2.1",
     "license": "MIT",
     "homepage": "https://vite.dev"
-  },
-  {
-    "ecosystem": "npm",
-    "name": "yallist",
-    "version": "3.1.1",
-    "license": "ISC",
-    "homepage": "git+https://github.com/isaacs/yallist.git"
   }
 ];

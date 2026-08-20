@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "licenses": "node scripts/generate-licenses.mjs",
-    "test:frontend": "node --experimental-strip-types --test tests/input.test.mjs tests/viewport.test.mjs tests/font-size.test.mjs tests/cfa-pattern.test.mjs tests/interface-layout.test.mjs",
+    "licenses:check": "npm run licenses && git diff --exit-code -- src/generated/licenses.ts",
+    "test:frontend": "node --experimental-strip-types --test tests/input.test.mjs tests/viewport.test.mjs tests/font-size.test.mjs tests/cfa-pattern.test.mjs tests/config-validation.test.mjs tests/interface-layout.test.mjs",
     "preview": "vite preview",
     "tauri": "tauri"
   },

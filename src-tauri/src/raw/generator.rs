@@ -1,6 +1,6 @@
 use std::{
     fs::{self, File, OpenOptions},
-    io::{BufWriter, Write},
+    io::{BufWriter, ErrorKind, Write},
     path::{Path, PathBuf},
     sync::atomic::{AtomicBool, Ordering},
     time::{Duration, Instant},
@@ -13,6 +13,8 @@ use super::{
     packing::pack_row,
     patterns::pixel_value,
 };
+
+const GENERATION_CANCELLED_ERROR: &str = "generation_cancelled";
 
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -50,6 +52,9 @@ where
     if !parent.is_dir() {
         return Err("输出目录不存在".into());
     }
+    if output_path.is_dir() {
+        return Err("输出路径不能是目录".into());
+    }
 
     let available = fs2::available_space(parent)
         .map_err(|error| format!("无法检查目标磁盘剩余空间：{error}"))?;
@@ -60,12 +65,7 @@ where
         ));
     }
 
-    let temporary_path = temporary_path(output_path);
-    let file = OpenOptions::new()
-        .write(true)
-        .create_new(true)
-        .open(&temporary_path)
-        .map_err(|error| format!("无法创建临时输出文件：{error}"))?;
+    let (temporary_path, file) = create_temporary_file(output_path)?;
 
     let started = Instant::now();
     let outcome = write_image(file, &config, layout, cancelled, started, &mut on_progress);
@@ -77,7 +77,7 @@ where
 
     if cancelled.load(Ordering::Relaxed) {
         let _ = fs::remove_file(&temporary_path);
-        return Err("已取消生成".into());
+        return Err(GENERATION_CANCELLED_ERROR.into());
     }
 
     on_progress(GenerationProgress {
@@ -89,15 +89,8 @@ where
         elapsed_ms: elapsed_ms(started),
     });
 
-    if output_path.exists() {
-        fs::remove_file(output_path).map_err(|error| {
-            let _ = fs::remove_file(&temporary_path);
-            format!("无法替换已有文件：{error}")
-        })?;
-    }
-    fs::rename(&temporary_path, output_path).map_err(|error| {
+    commit_output(&temporary_path, output_path).inspect_err(|_| {
         let _ = fs::remove_file(&temporary_path);
-        format!("无法完成输出文件：{error}")
     })?;
 
     Ok(GenerationResult {
@@ -218,16 +211,74 @@ where
 
 fn check_cancelled(cancelled: &AtomicBool) -> Result<(), String> {
     if cancelled.load(Ordering::Relaxed) {
-        Err("已取消生成".into())
+        Err(GENERATION_CANCELLED_ERROR.into())
     } else {
         Ok(())
     }
 }
 
-fn temporary_path(output_path: &Path) -> PathBuf {
+fn sidecar_path(output_path: &Path, attempt: u32, extension: &str) -> PathBuf {
     let mut name = output_path.as_os_str().to_os_string();
-    name.push(format!(".graw.{}.part", std::process::id()));
+    name.push(format!(
+        ".graw.{}.{}.{}",
+        std::process::id(),
+        attempt,
+        extension
+    ));
     PathBuf::from(name)
+}
+
+fn create_temporary_file(output_path: &Path) -> Result<(PathBuf, File), String> {
+    for attempt in 0..u32::MAX {
+        let path = sidecar_path(output_path, attempt, "part");
+        match OpenOptions::new().write(true).create_new(true).open(&path) {
+            Ok(file) => return Ok((path, file)),
+            Err(error) if error.kind() == ErrorKind::AlreadyExists => continue,
+            Err(error) => return Err(format!("无法创建临时输出文件：{error}")),
+        }
+    }
+    Err("无法为输出文件分配临时文件名".into())
+}
+
+fn move_existing_to_backup(output_path: &Path) -> Result<Option<PathBuf>, String> {
+    if !output_path.exists() {
+        return Ok(None);
+    }
+    for attempt in 0..u32::MAX {
+        let backup_path = sidecar_path(output_path, attempt, "backup");
+        match fs::rename(output_path, &backup_path) {
+            Ok(()) => return Ok(Some(backup_path)),
+            Err(error) if error.kind() == ErrorKind::AlreadyExists => continue,
+            Err(error) if error.kind() == ErrorKind::NotFound => return Ok(None),
+            Err(error) => return Err(format!("无法暂存已有输出文件：{error}")),
+        }
+    }
+    Err("无法为已有输出文件分配备份文件名".into())
+}
+
+fn commit_output(temporary_path: &Path, output_path: &Path) -> Result<(), String> {
+    let backup_path = move_existing_to_backup(output_path)?;
+    match fs::rename(temporary_path, output_path) {
+        Ok(()) => {
+            if let Some(backup_path) = backup_path {
+                let _ = fs::remove_file(backup_path);
+            }
+            Ok(())
+        }
+        Err(error) => {
+            let restore_error = backup_path
+                .as_ref()
+                .and_then(|backup_path| fs::rename(backup_path, output_path).err());
+            if let (Some(backup_path), Some(restore_error)) = (backup_path.as_ref(), restore_error)
+            {
+                return Err(format!(
+                    "无法完成输出文件：{error}；恢复旧文件失败：{restore_error}；旧文件保留在 {}",
+                    backup_path.display()
+                ));
+            }
+            Err(format!("无法完成输出文件：{error}"))
+        }
+    }
 }
 
 struct ProgressTracker {
@@ -286,9 +337,8 @@ mod tests {
     };
     use std::time::{SystemTime, UNIX_EPOCH};
 
-    #[test]
-    fn writes_expected_layout_and_fill_bytes() {
-        let config = RawConfig {
+    fn test_config() -> RawConfig {
+        RawConfig {
             width: 4,
             height: 2,
             bit_depth: 10,
@@ -314,13 +364,22 @@ mod tests {
             row_padding_fill: 0xcc,
             frame_padding_fill: 0x5a,
             frame_count: 2,
-        };
+        }
+    }
+
+    fn test_path(label: &str) -> PathBuf {
         let stamp = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let path = std::env::temp_dir().join(format!("graw-test-{stamp}.raw"));
-        let result = generate_to_path(config, &path, &AtomicBool::new(false), |_| {}).unwrap();
+        std::env::temp_dir().join(format!("graw-test-{label}-{stamp}.raw"))
+    }
+
+    #[test]
+    fn writes_expected_layout_and_fill_bytes() {
+        let path = test_path("layout");
+        let result =
+            generate_to_path(test_config(), &path, &AtomicBool::new(false), |_| {}).unwrap();
         let bytes = fs::read(&path).unwrap();
         assert_eq!(result.total_bytes, 68);
         assert_eq!(bytes.len(), 68);
@@ -328,5 +387,44 @@ mod tests {
         assert_eq!(&bytes[9..12], &[0xcc; 3]);
         assert_eq!(&bytes[20..36], &[0x5a; 16]);
         fs::remove_file(path).unwrap();
+    }
+
+    #[test]
+    fn skips_stale_temporary_files() {
+        let path = test_path("stale-part");
+        let stale_path = sidecar_path(&path, 0, "part");
+        fs::write(&stale_path, b"stale").unwrap();
+
+        generate_to_path(test_config(), &path, &AtomicBool::new(false), |_| {}).unwrap();
+
+        assert!(path.is_file());
+        assert_eq!(fs::read(&stale_path).unwrap(), b"stale");
+        assert!(!sidecar_path(&path, 1, "part").exists());
+        fs::remove_file(path).unwrap();
+        fs::remove_file(stale_path).unwrap();
+    }
+
+    #[test]
+    fn replaces_existing_output_without_leaving_sidecars() {
+        let path = test_path("replace");
+        fs::write(&path, b"old output").unwrap();
+
+        generate_to_path(test_config(), &path, &AtomicBool::new(false), |_| {}).unwrap();
+
+        assert_eq!(fs::metadata(&path).unwrap().len(), 68);
+        assert!(!sidecar_path(&path, 0, "part").exists());
+        assert!(!sidecar_path(&path, 0, "backup").exists());
+        fs::remove_file(path).unwrap();
+    }
+
+    #[test]
+    fn cancellation_removes_partial_output() {
+        let path = test_path("cancel");
+        let error =
+            generate_to_path(test_config(), &path, &AtomicBool::new(true), |_| {}).unwrap_err();
+
+        assert_eq!(error, GENERATION_CANCELLED_ERROR);
+        assert!(!path.exists());
+        assert!(!sidecar_path(&path, 0, "part").exists());
     }
 }
