@@ -32,7 +32,7 @@ fn pack_unpacked16(config: &RawConfig, pixels: &[u16], output: &mut Vec<u8>) {
 
 fn pack_mipi10(pixels: &[u16], output: &mut Vec<u8>) {
     output.reserve(pixels.len() / 4 * 5);
-    for group in pixels.chunks_exact(4) {
+    for group in pixels.as_chunks::<4>().0 {
         output.extend_from_slice(&[
             (group[0] >> 2) as u8,
             (group[1] >> 2) as u8,
@@ -48,7 +48,7 @@ fn pack_mipi10(pixels: &[u16], output: &mut Vec<u8>) {
 
 fn pack_mipi12(pixels: &[u16], output: &mut Vec<u8>) {
     output.reserve(pixels.len() / 2 * 3);
-    for group in pixels.chunks_exact(2) {
+    for group in pixels.as_chunks::<2>().0 {
         output.extend_from_slice(&[
             (group[0] >> 4) as u8,
             (group[1] >> 4) as u8,
@@ -59,7 +59,7 @@ fn pack_mipi12(pixels: &[u16], output: &mut Vec<u8>) {
 
 fn pack_mipi14(pixels: &[u16], output: &mut Vec<u8>) {
     output.reserve(pixels.len() / 4 * 7);
-    for group in pixels.chunks_exact(4) {
+    for group in pixels.as_chunks::<4>().0 {
         output.extend_from_slice(&[
             (group[0] >> 6) as u8,
             (group[1] >> 6) as u8,
