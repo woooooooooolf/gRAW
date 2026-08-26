@@ -1915,7 +1915,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@vitejs/plugin-react",
-    "version": "6.0.5",
+    "version": "6.1.0",
     "license": "MIT",
     "homepage": "https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#readme"
   },
