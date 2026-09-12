@@ -1236,14 +1236,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-dialog",
-    "version": "2.7.2",
+    "version": "2.7.3",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-fs",
-    "version": "2.5.1",
+    "version": "2.5.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
