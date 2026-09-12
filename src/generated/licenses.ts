@@ -1250,7 +1250,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-opener",
-    "version": "2.5.4",
+    "version": "2.5.5",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
