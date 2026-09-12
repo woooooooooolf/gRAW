@@ -1887,7 +1887,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-opener",
-    "version": "2.5.4",
+    "version": "2.5.5",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
