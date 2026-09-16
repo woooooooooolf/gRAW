@@ -16,6 +16,10 @@
 
 gRAW generates deterministic, headerless RAW test images for sensor-pipeline development, decoder validation, image-quality experiments, and automated test fixtures. It combines exact byte-layout controls with a compact bilingual desktop interface.
 
+<div align="center">
+  <img src="./docs/images/graw-interface-en.png" alt="gRAW main interface in light and dark themes" width="100%" />
+</div>
+
 > [!IMPORTANT]
 > gRAW writes pixel payloads, alignment padding, and optional leading bytes exactly as configured. It does not add camera metadata, DNG/TIFF headers, or color-processing metadata.
 

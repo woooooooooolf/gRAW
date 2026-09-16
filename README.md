@@ -16,6 +16,10 @@
 
 gRAW 用于生成确定性的无文件头 RAW 测试图像，适合传感器图像链路开发、解码器验证、图像质量实验和自动化测试数据构造。它将精确的字节布局控制与紧凑的中英文桌面界面结合在一起。
 
+<div align="center">
+  <img src="./docs/images/graw-interface-zh.png" alt="gRAW 中文主界面的浅色与深色主题" width="100%" />
+</div>
+
 > [!IMPORTANT]
 > gRAW 会严格按照配置写入像素载荷、对齐填充和可选的文件起始字节，但不会添加相机元数据、DNG/TIFF 文件头或色彩处理元数据。
 
