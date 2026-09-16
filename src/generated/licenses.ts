@@ -1901,7 +1901,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@types/react-dom",
-    "version": "19.2.7",
+    "version": "19.3.0",
     "license": "MIT",
     "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-dom"
   },
@@ -1992,7 +1992,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "react-dom",
-    "version": "19.2.8",
+    "version": "19.3.0",
     "license": "MIT",
     "homepage": "https://react.dev/"
   },
@@ -2006,7 +2006,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "scheduler",
-    "version": "0.27.0",
+    "version": "0.28.0",
     "license": "MIT",
     "homepage": "https://react.dev/"
   },
