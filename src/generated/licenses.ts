@@ -1838,14 +1838,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@oxc-project/types",
-    "version": "0.146.0",
+    "version": "0.149.0",
     "license": "MIT",
     "homepage": "https://oxc.rs"
   },
   {
     "ecosystem": "npm",
     "name": "@rolldown/binding-win32-x64-msvc",
-    "version": "1.2.5",
+    "version": "1.2.8",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -1957,7 +1957,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "nanoid",
-    "version": "3.3.18",
+    "version": "3.3.19",
     "license": "MIT",
     "homepage": "ai/nanoid"
   },
@@ -1971,14 +1971,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "picomatch",
-    "version": "4.0.5",
+    "version": "4.0.7",
     "license": "MIT",
     "homepage": "https://github.com/micromatch/picomatch"
   },
   {
     "ecosystem": "npm",
     "name": "postcss",
-    "version": "8.5.26",
+    "version": "8.5.28",
     "license": "MIT",
     "homepage": "https://postcss.org/"
   },
@@ -1999,7 +1999,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "rolldown",
-    "version": "1.2.5",
+    "version": "1.2.8",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -2034,7 +2034,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "vite",
-    "version": "8.2.2",
+    "version": "8.3.0",
     "license": "MIT",
     "homepage": "https://vite.dev"
   }
