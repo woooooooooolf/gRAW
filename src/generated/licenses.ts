@@ -1754,14 +1754,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@oxc-project/types",
-    "version": "0.149.0",
+    "version": "0.153.0",
     "license": "MIT",
     "homepage": "https://oxc.rs"
   },
   {
     "ecosystem": "npm",
     "name": "@rolldown/binding-win32-x64-msvc",
-    "version": "1.2.8",
+    "version": "1.2.13",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -1782,14 +1782,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/cli",
-    "version": "2.11.4",
+    "version": "2.12.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/cli-win32-x64-msvc",
-    "version": "2.11.4",
+    "version": "2.12.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
@@ -1873,7 +1873,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "nanoid",
-    "version": "3.3.19",
+    "version": "3.3.20",
     "license": "MIT",
     "homepage": "ai/nanoid"
   },
@@ -1894,7 +1894,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "postcss",
-    "version": "8.5.28",
+    "version": "8.5.29",
     "license": "MIT",
     "homepage": "https://postcss.org/"
   },
@@ -1915,7 +1915,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "rolldown",
-    "version": "1.2.8",
+    "version": "1.2.13",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -1929,7 +1929,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "source-map-js",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "license": "BSD-3-Clause",
     "homepage": "https://github.com/7rulnik/source-map-js"
   },
@@ -1950,7 +1950,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "vite",
-    "version": "8.3.0",
+    "version": "8.3.4",
     "license": "MIT",
     "homepage": "https://vite.dev"
   }
