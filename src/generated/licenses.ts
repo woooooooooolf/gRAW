@@ -1236,7 +1236,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-opener",
-    "version": "2.5.5",
+    "version": "2.7.0",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1537,13 +1537,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "windows",
-    "version": "0.61.3",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows",
     "version": "0.62.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
@@ -1565,13 +1558,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "windows-collections",
-    "version": "0.2.0",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-collections",
     "version": "0.3.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
@@ -1579,21 +1565,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "windows-core",
-    "version": "0.61.2",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-core",
     "version": "0.62.2",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-future",
-    "version": "0.2.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
@@ -1621,21 +1593,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "windows-link",
-    "version": "0.1.3",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-link",
     "version": "0.2.1",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-numerics",
-    "version": "0.2.0",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
@@ -1649,21 +1607,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "windows-result",
-    "version": "0.3.4",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-result",
     "version": "0.4.1",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-strings",
-    "version": "0.4.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
@@ -1706,13 +1650,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "ecosystem": "Cargo",
     "name": "windows-targets",
     "version": "0.53.5",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-threading",
-    "version": "0.1.0",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
@@ -1866,7 +1803,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-opener",
-    "version": "2.5.5",
+    "version": "2.7.0",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
