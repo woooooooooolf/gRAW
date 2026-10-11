@@ -25,14 +25,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "alloc-no-stdlib",
-    "version": "2.0.4",
+    "version": "3.0.0",
     "license": "BSD-3-Clause",
     "homepage": "https://github.com/dropbox/rust-alloc-no-stdlib"
   },
   {
     "ecosystem": "Cargo",
     "name": "alloc-stdlib",
-    "version": "0.2.4",
+    "version": "0.3.0",
     "license": "BSD-3-Clause",
     "homepage": "https://github.com/dropbox/rust-alloc-no-stdlib"
   },
@@ -95,14 +95,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "brotli",
-    "version": "8.0.4",
+    "version": "9.0.0",
     "license": "BSD-3-Clause AND MIT",
     "homepage": "https://github.com/dropbox/rust-brotli"
   },
   {
     "ecosystem": "Cargo",
     "name": "brotli-decompressor",
-    "version": "5.0.3",
+    "version": "6.0.1",
     "license": "BSD-3-Clause/MIT",
     "homepage": "https://github.com/dropbox/rust-brotli-decompressor"
   },
@@ -144,7 +144,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "cargo_toml",
-    "version": "0.22.3",
+    "version": "1.0.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://lib.rs/cargo_toml"
   },
@@ -165,7 +165,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "cfb",
-    "version": "0.7.3",
+    "version": "0.14.0",
     "license": "MIT",
     "homepage": "https://github.com/mdsteele/rust-cfb"
   },
@@ -228,30 +228,23 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "cssparser",
-    "version": "0.36.0",
+    "version": "0.37.0",
     "license": "MPL-2.0",
     "homepage": "https://github.com/servo/rust-cssparser"
   },
   {
     "ecosystem": "Cargo",
     "name": "cssparser-macros",
-    "version": "0.6.1",
+    "version": "0.7.1",
     "license": "MPL-2.0",
     "homepage": "https://github.com/servo/rust-cssparser"
   },
   {
     "ecosystem": "Cargo",
     "name": "ctor",
-    "version": "0.8.0",
+    "version": "1.0.13",
     "license": "Apache-2.0 OR MIT",
-    "homepage": "https://github.com/mmastrac/rust-ctor"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "ctor-proc-macro",
-    "version": "0.0.7",
-    "license": "Apache-2.0 OR MIT",
-    "homepage": "https://github.com/mmastrac/rust-ctor"
+    "homepage": "https://github.com/mmastrac/linktime"
   },
   {
     "ecosystem": "Cargo",
@@ -305,9 +298,9 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "dirs",
-    "version": "6.0.0",
+    "version": "7.0.0",
     "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/soc/dirs-rs"
+    "homepage": "https://codeberg.org/dirs/dirs-rs"
   },
   {
     "ecosystem": "Cargo",
@@ -326,7 +319,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "dom_query",
-    "version": "0.27.0",
+    "version": "0.28.0",
     "license": "MIT",
     "homepage": "https://github.com/niklak/dom_query"
   },
@@ -350,20 +343,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "version": "0.3.5",
     "license": "MPL-2.0",
     "homepage": "https://github.com/upsuper/dtoa-short"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "dtor",
-    "version": "0.3.0",
-    "license": "Apache-2.0 OR MIT",
-    "homepage": "https://github.com/mmastrac/rust-ctor"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "dtor-proc-macro",
-    "version": "0.0.6",
-    "license": "Apache-2.0 OR MIT",
-    "homepage": "https://github.com/mmastrac/rust-ctor"
   },
   {
     "ecosystem": "Cargo",
@@ -515,7 +494,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "html5ever",
-    "version": "0.38.0",
+    "version": "0.39.0",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/servo/html5ever"
   },
@@ -620,7 +599,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "infer",
-    "version": "0.19.0",
+    "version": "0.22.0",
     "license": "MIT",
     "homepage": "https://github.com/bojand/infer"
   },
@@ -634,23 +613,23 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "json-patch",
-    "version": "3.0.1",
+    "version": "4.2.0",
     "license": "MIT/Apache-2.0",
     "homepage": "https://github.com/idubrov/json-patch"
   },
   {
     "ecosystem": "Cargo",
     "name": "jsonptr",
-    "version": "0.6.3",
+    "version": "0.7.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/chanced/jsonptr"
   },
   {
     "ecosystem": "Cargo",
     "name": "keyboard-types",
-    "version": "0.7.0",
+    "version": "0.8.3",
     "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/pyfisch/keyboard-types"
+    "homepage": "https://github.com/rust-windowing/keyboard-types"
   },
   {
     "ecosystem": "Cargo",
@@ -683,7 +662,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "markup5ever",
-    "version": "0.38.0",
+    "version": "0.39.0",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/servo/html5ever"
   },
@@ -718,7 +697,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "muda",
-    "version": "0.19.3",
+    "version": "0.20.0",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/muda"
   },
@@ -838,6 +817,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "ecosystem": "Cargo",
     "name": "png",
     "version": "0.17.16",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/image-rs/image-png"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "png",
+    "version": "0.18.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/image-rs/image-png"
   },
@@ -991,7 +977,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "selectors",
-    "version": "0.36.1",
+    "version": "0.38.0",
     "license": "MPL-2.0",
     "homepage": "https://github.com/servo/stylo"
   },
@@ -1194,56 +1180,56 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tao",
-    "version": "0.35.3",
+    "version": "0.37.1",
     "license": "Apache-2.0",
     "homepage": "https://github.com/tauri-apps/tao"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri",
-    "version": "2.11.5",
+    "version": "2.12.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-build",
-    "version": "2.6.3",
+    "version": "2.7.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-codegen",
-    "version": "2.6.3",
+    "version": "2.7.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-macros",
-    "version": "2.6.3",
+    "version": "2.7.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin",
-    "version": "2.6.3",
+    "version": "2.7.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-dialog",
-    "version": "2.7.3",
+    "version": "2.8.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-fs",
-    "version": "2.5.2",
+    "version": "2.6.0",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1257,21 +1243,21 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-runtime",
-    "version": "2.11.3",
+    "version": "2.12.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-runtime-wry",
-    "version": "2.11.4",
+    "version": "2.12.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-utils",
-    "version": "2.9.3",
+    "version": "2.10.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
@@ -1292,21 +1278,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "thiserror",
-    "version": "1.0.69",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/dtolnay/thiserror"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "thiserror",
     "version": "2.0.19",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/dtolnay/thiserror"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "thiserror-impl",
-    "version": "1.0.69",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/dtolnay/thiserror"
   },
@@ -1369,21 +1341,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "toml",
-    "version": "0.9.12+spec-1.1.0",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/toml-rs/toml"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "toml",
     "version": "1.1.3+spec-1.1.0",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/toml-rs/toml"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "toml_datetime",
-    "version": "0.7.5+spec-1.1.0",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/toml-rs/toml"
   },
@@ -1432,7 +1390,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tray-icon",
-    "version": "0.24.1",
+    "version": "0.25.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/tray-icon"
   },
@@ -1449,41 +1407,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "version": "1.20.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/paholg/typenum"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "unic-char-property",
-    "version": "0.9.0",
-    "license": "MIT/Apache-2.0",
-    "homepage": "https://github.com/open-i18n/rust-unic/"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "unic-char-range",
-    "version": "0.9.0",
-    "license": "MIT/Apache-2.0",
-    "homepage": "https://github.com/open-i18n/rust-unic/"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "unic-common",
-    "version": "0.9.0",
-    "license": "MIT/Apache-2.0",
-    "homepage": "https://github.com/open-i18n/rust-unic/"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "unic-ucd-ident",
-    "version": "0.9.0",
-    "license": "MIT/Apache-2.0",
-    "homepage": "https://github.com/open-i18n/rust-unic/"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "unic-ucd-version",
-    "version": "0.9.0",
-    "license": "MIT/Apache-2.0",
-    "homepage": "https://github.com/open-i18n/rust-unic/"
   },
   {
     "ecosystem": "Cargo",
@@ -1509,7 +1432,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "urlpattern",
-    "version": "0.3.0",
+    "version": "0.6.0",
     "license": "MIT",
     "homepage": "https://github.com/denoland/rust-urlpattern"
   },
@@ -1564,8 +1487,15 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "web-time",
+    "version": "1.1.0",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/daxpedda/web-time"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "webview2-com",
-    "version": "0.38.2",
+    "version": "0.39.1",
     "license": "MIT",
     "homepage": "https://github.com/wravery/webview2-rs"
   },
@@ -1579,7 +1509,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "webview2-com-sys",
-    "version": "0.38.2",
+    "version": "0.39.1",
     "license": "MIT",
     "homepage": "https://github.com/wravery/webview2-rs"
   },
@@ -1600,7 +1530,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "window-vibrancy",
-    "version": "0.6.0",
+    "version": "0.8.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri-plugin-vibrancy"
   },
@@ -1608,6 +1538,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "ecosystem": "Cargo",
     "name": "windows",
     "version": "0.61.3",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/microsoft/windows-rs"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "windows",
+    "version": "0.62.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
@@ -1634,6 +1571,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "windows-collections",
+    "version": "0.3.2",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/microsoft/windows-rs"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "windows-core",
     "version": "0.61.2",
     "license": "MIT OR Apache-2.0",
@@ -1641,8 +1585,22 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "windows-core",
+    "version": "0.62.2",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/microsoft/windows-rs"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "windows-future",
     "version": "0.2.1",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/microsoft/windows-rs"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "windows-future",
+    "version": "0.3.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
@@ -1683,6 +1641,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "windows-numerics",
+    "version": "0.3.1",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/microsoft/windows-rs"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "windows-result",
     "version": "0.3.4",
     "license": "MIT OR Apache-2.0",
@@ -1690,8 +1655,22 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "windows-result",
+    "version": "0.4.1",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/microsoft/windows-rs"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "windows-strings",
     "version": "0.4.2",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/microsoft/windows-rs"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "windows-strings",
+    "version": "0.5.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
@@ -1739,17 +1718,17 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
-    "name": "windows-version",
-    "version": "0.1.7",
+    "name": "windows-threading",
+    "version": "0.2.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
   {
     "ecosystem": "Cargo",
-    "name": "winnow",
-    "version": "0.7.15",
-    "license": "MIT",
-    "homepage": "https://github.com/winnow-rs/winnow"
+    "name": "windows-version",
+    "version": "0.1.7",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/microsoft/windows-rs"
   },
   {
     "ecosystem": "Cargo",
@@ -1775,7 +1754,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "wry",
-    "version": "0.55.1",
+    "version": "0.57.0",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/wry"
   },
@@ -1859,7 +1838,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/api",
-    "version": "2.11.1",
+    "version": "2.12.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
@@ -1880,7 +1859,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-dialog",
-    "version": "2.7.3",
+    "version": "2.8.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
