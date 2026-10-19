@@ -1019,7 +1019,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "serde_json",
-    "version": "1.0.151",
+    "version": "1.0.154",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/serde-rs/json"
   },
@@ -1187,14 +1187,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri",
-    "version": "2.12.1",
+    "version": "2.12.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-build",
-    "version": "2.7.1",
+    "version": "2.7.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
@@ -1222,21 +1222,21 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-dialog",
-    "version": "2.8.1",
+    "version": "2.8.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-fs",
-    "version": "2.6.0",
+    "version": "2.7.0",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-opener",
-    "version": "2.7.0",
+    "version": "2.7.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1775,35 +1775,35 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/api",
-    "version": "2.12.1",
+    "version": "2.12.3",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/cli",
-    "version": "2.12.1",
+    "version": "2.12.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/cli-win32-x64-msvc",
-    "version": "2.12.1",
+    "version": "2.12.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-dialog",
-    "version": "2.8.1",
+    "version": "2.8.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-opener",
-    "version": "2.7.0",
+    "version": "2.7.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1831,7 +1831,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@vitejs/plugin-react",
-    "version": "6.1.1",
+    "version": "6.1.2",
     "license": "MIT",
     "homepage": "https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#readme"
   },
