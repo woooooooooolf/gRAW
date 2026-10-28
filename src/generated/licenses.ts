@@ -1137,6 +1137,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "static_vcruntime",
+    "version": "3.0.0",
+    "license": "MIT OR Apache-2.0 OR Zlib",
+    "homepage": "https://github.com/ChrisDenton/static_vcruntime"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "string_cache",
     "version": "0.9.0",
     "license": "MIT OR Apache-2.0",
@@ -1194,7 +1201,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-build",
-    "version": "2.7.2",
+    "version": "2.7.3",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
@@ -1222,21 +1229,21 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-dialog",
-    "version": "2.8.2",
+    "version": "2.8.3",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-fs",
-    "version": "2.7.0",
+    "version": "2.7.1",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-opener",
-    "version": "2.7.1",
+    "version": "2.7.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1257,7 +1264,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-utils",
-    "version": "2.10.1",
+    "version": "2.10.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
@@ -1754,14 +1761,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@oxc-project/types",
-    "version": "0.153.0",
+    "version": "0.155.0",
     "license": "MIT",
     "homepage": "https://oxc.rs"
   },
   {
     "ecosystem": "npm",
     "name": "@rolldown/binding-win32-x64-msvc",
-    "version": "1.2.13",
+    "version": "1.2.15",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -1775,35 +1782,35 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/api",
-    "version": "2.12.3",
+    "version": "2.12.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/cli",
-    "version": "2.12.2",
+    "version": "2.12.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/cli-win32-x64-msvc",
-    "version": "2.12.2",
+    "version": "2.12.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-dialog",
-    "version": "2.8.2",
+    "version": "2.8.3",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-opener",
-    "version": "2.7.1",
+    "version": "2.7.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1894,28 +1901,28 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "postcss",
-    "version": "8.5.29",
+    "version": "8.5.31",
     "license": "MIT",
     "homepage": "https://postcss.org/"
   },
   {
     "ecosystem": "npm",
     "name": "react",
-    "version": "19.3.0",
+    "version": "19.3.1",
     "license": "MIT",
     "homepage": "https://react.dev/"
   },
   {
     "ecosystem": "npm",
     "name": "react-dom",
-    "version": "19.3.0",
+    "version": "19.3.1",
     "license": "MIT",
     "homepage": "https://react.dev/"
   },
   {
     "ecosystem": "npm",
     "name": "rolldown",
-    "version": "1.2.13",
+    "version": "1.2.15",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -1950,7 +1957,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "vite",
-    "version": "8.3.4",
+    "version": "8.3.5",
     "license": "MIT",
     "homepage": "https://vite.dev"
   }
