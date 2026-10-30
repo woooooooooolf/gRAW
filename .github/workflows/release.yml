@@ -7,12 +7,13 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version, e.g. v0.0.9"
+        description: "Release version, e.g. v0.8.0"
         required: true
 
 permissions:
   contents: write
   id-token: write
+  attestations: write
 
 concurrency:
   group: release-${{ github.ref }}
@@ -51,6 +52,16 @@ jobs:
           rustup toolchain install stable --profile minimal --component rustfmt
           rustup default stable
 
+      - name: Verify release version
+        shell: pwsh
+        run: |
+          $expectedVersion = $env:VERSION -replace '^v', ''
+          $packageVersion = (Get-Content package.json -Raw | ConvertFrom-Json).version
+          $tauriVersion = (Get-Content src-tauri/tauri.conf.json -Raw | ConvertFrom-Json).version
+          if ($packageVersion -ne $expectedVersion -or $tauriVersion -ne $expectedVersion) {
+            throw "Release tag $env:VERSION does not match app versions: package=$packageVersion, tauri=$tauriVersion"
+          }
+
       - name: Install frontend dependencies
         run: npm ci
 
@@ -59,6 +70,9 @@ jobs:
 
       - name: Build portable executable
         run: npm run tauri build -- --no-bundle
+
+      - name: Test release CLI
+        run: npm run test:cli
 
       - name: Stage release artifacts
         shell: pwsh

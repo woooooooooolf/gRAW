@@ -59,3 +59,9 @@ jobs:
 
       - name: Run Rust tests
         run: cargo test --manifest-path src-tauri/Cargo.toml
+
+      - name: Build portable executable
+        run: npm run tauri build -- --no-bundle
+
+      - name: Test release CLI
+        run: npm run test:cli

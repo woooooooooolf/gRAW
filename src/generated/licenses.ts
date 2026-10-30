@@ -38,6 +38,41 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "anstream",
+    "version": "1.0.0",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/rust-cli/anstyle.git"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "anstyle",
+    "version": "1.0.14",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/rust-cli/anstyle.git"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "anstyle-parse",
+    "version": "1.0.0",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/rust-cli/anstyle.git"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "anstyle-query",
+    "version": "1.1.5",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/rust-cli/anstyle.git"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "anstyle-wincon",
+    "version": "3.0.11",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/rust-cli/anstyle.git"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "anyhow",
     "version": "1.0.104",
     "license": "MIT OR Apache-2.0",
@@ -182,6 +217,41 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "version": "0.4.45",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/chronotope/chrono"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "clap",
+    "version": "4.6.7",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/clap-rs/clap"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "clap_builder",
+    "version": "4.6.7",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/clap-rs/clap"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "clap_derive",
+    "version": "4.6.7",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/clap-rs/clap"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "clap_lex",
+    "version": "1.1.1",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/clap-rs/clap"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "colorchoice",
+    "version": "1.0.5",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/rust-cli/anstyle.git"
   },
   {
     "ecosystem": "Cargo",
@@ -605,6 +675,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "is_terminal_polyfill",
+    "version": "1.70.2",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/polyfill-rs/is_terminal_polyfill"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "itoa",
     "version": "1.0.18",
     "license": "MIT OR Apache-2.0",
@@ -728,6 +805,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "version": "1.21.4",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/matklad/once_cell"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "once_cell_polyfill",
+    "version": "1.70.2",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/polyfill-rs/once_cell_polyfill"
   },
   {
     "ecosystem": "Cargo",
@@ -1449,6 +1533,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "version": "1.0.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://docs.rs/utf8_iter/"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "utf8parse",
+    "version": "0.2.2",
+    "license": "Apache-2.0 OR MIT",
+    "homepage": "https://github.com/alacritty/vte"
   },
   {
     "ecosystem": "Cargo",

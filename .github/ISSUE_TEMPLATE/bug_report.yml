@@ -9,7 +9,7 @@ body:
     id: version
     attributes:
       label: gRAW 版本
-      description: 发布页中的版本号，例如 v0.0.9
+      description: 发布页中的版本号，例如 v0.8.0
     validations:
       required: true
   - type: input

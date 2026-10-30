@@ -16,6 +16,10 @@
 
 gRAW 用于生成确定性的无文件头 RAW 测试图像，适合传感器图像链路开发、解码器验证、图像质量实验和自动化测试数据构造。它将精确的字节布局控制与紧凑的中英文桌面界面结合在一起。
 
+<div align="center">
+  <img src="./docs/images/graw-interface-zh.png" alt="gRAW 中文主界面的浅色与深色主题" width="100%" />
+</div>
+
 > [!IMPORTANT]
 > gRAW 会严格按照配置写入像素载荷、对齐填充和可选的文件起始字节，但不会添加相机元数据、DNG/TIFF 文件头或色彩处理元数据。
 
@@ -130,6 +134,12 @@ Get-FileHash -Algorithm SHA256 .\gRAW-windows-x64-v<版本>.exe
 顶部徽章显示 CI 与最新发布状态。
 
 此外，[发布工作流](./.github/workflows/release.yml) 会在推送 `v*` 标签时自动构建便携版并创建 GitHub Release：产物按 `gRAW-windows-x64-v<版本>.exe` 命名并附带 SHA-256 校验文件，发布说明取自仓库根目录的 `RELEASE_NOTES.md`。
+
+## 命令行调用
+
+同一个 EXE 无参数时打开界面，有参数时直接执行命令行任务。CLI 要求所有影响当前输出的生成参数显式提供，支持 --dry-run 仅检查、直接覆盖已有输出、进度和取消。
+
+参数清单、条件必填规则及 PowerShell/CMD/Python 的可靠等待方式见 [命令行使用指南](./docs/CLI.md)。Windows GUI 子系统程序的直接调用可能提前返回，自动化时请按指南等待进程退出并检查退出码。
 
 ## 输出模型
 

@@ -16,6 +16,10 @@
 
 gRAW generates deterministic, headerless RAW test images for sensor-pipeline development, decoder validation, image-quality experiments, and automated test fixtures. It combines exact byte-layout controls with a compact bilingual desktop interface.
 
+<div align="center">
+  <img src="./docs/images/graw-interface-en.png" alt="gRAW main interface in light and dark themes" width="100%" />
+</div>
+
 > [!IMPORTANT]
 > gRAW writes pixel payloads, alignment padding, and optional leading bytes exactly as configured. It does not add camera metadata, DNG/TIFF headers, or color-processing metadata.
 
@@ -130,6 +134,12 @@ The [GitHub Actions workflow](./.github/workflows/ci.yml) runs on pushes, pull r
 The badges above show the live CI and latest release status.
 
 In addition, the [release workflow](./.github/workflows/release.yml) builds the portable executable and creates a GitHub Release whenever a `v*` tag is pushed. Artifacts follow the `gRAW-windows-x64-v<version>.exe` naming convention and ship with a SHA-256 checksum file; release notes are taken from `RELEASE_NOTES.md` at the repository root.
+
+## Command-line usage
+
+The same EXE opens the GUI without arguments and runs a headless generation task when given arguments. Every parameter affecting the selected output must be explicit. The CLI supports --dry-run, replacement of existing output, progress, and cancellation.
+
+See the [CLI guide](./docs/CLI.en.md) for parameters, conditional requirements, and reliable PowerShell/CMD/Python invocation. Direct invocation of a Windows GUI-subsystem executable may return early; automation must wait for completion and inspect the exit code.
 
 ## Output model
 

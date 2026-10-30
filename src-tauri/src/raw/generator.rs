@@ -9,12 +9,41 @@ use std::{
 use serde::Serialize;
 
 use super::{
-    model::{FrameLayout, RawConfig},
+    model::{ConfigError, FrameLayout, RawConfig},
     packing::pack_row,
     patterns::pixel_value,
 };
 
-const GENERATION_CANCELLED_ERROR: &str = "generation_cancelled";
+#[derive(Debug)]
+pub enum GenerationError {
+    InvalidConfig(ConfigError),
+    Cancelled,
+    Output(String),
+}
+
+impl std::fmt::Display for GenerationError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::InvalidConfig(error) => f.write_str(&error.message),
+            Self::Cancelled => f.write_str("generation_cancelled"),
+            Self::Output(message) => f.write_str(message),
+        }
+    }
+}
+
+impl std::error::Error for GenerationError {}
+
+impl From<String> for GenerationError {
+    fn from(message: String) -> Self {
+        Self::Output(message)
+    }
+}
+
+impl From<&str> for GenerationError {
+    fn from(message: &str) -> Self {
+        Self::Output(message.into())
+    }
+}
 
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -40,11 +69,13 @@ pub fn generate_to_path<F>(
     output_path: &Path,
     cancelled: &AtomicBool,
     mut on_progress: F,
-) -> Result<GenerationResult, String>
+) -> Result<GenerationResult, GenerationError>
 where
     F: FnMut(GenerationProgress),
 {
-    let layout = config.validate()?;
+    let layout = config
+        .validate_detailed()
+        .map_err(GenerationError::InvalidConfig)?;
     let parent = output_path
         .parent()
         .filter(|path| !path.as_os_str().is_empty())
@@ -62,7 +93,8 @@ where
         return Err(format!(
             "目标磁盘空间不足：需要 {} 字节，可用 {} 字节",
             layout.total_size, available
-        ));
+        )
+        .into());
     }
 
     let (temporary_path, file) = create_temporary_file(output_path)?;
@@ -77,7 +109,7 @@ where
 
     if cancelled.load(Ordering::Relaxed) {
         let _ = fs::remove_file(&temporary_path);
-        return Err(GENERATION_CANCELLED_ERROR.into());
+        return Err(GenerationError::Cancelled);
     }
 
     on_progress(GenerationProgress {
@@ -107,7 +139,7 @@ fn write_image<F>(
     cancelled: &AtomicBool,
     started: Instant,
     on_progress: &mut F,
-) -> Result<(), String>
+) -> Result<(), GenerationError>
 where
     F: FnMut(GenerationProgress),
 {
@@ -188,7 +220,7 @@ fn write_fill<F>(
     stage: &'static str,
     current_frame: u32,
     on_progress: &mut F,
-) -> Result<(), String>
+) -> Result<(), GenerationError>
 where
     F: FnMut(GenerationProgress),
 {
@@ -209,9 +241,9 @@ where
     Ok(())
 }
 
-fn check_cancelled(cancelled: &AtomicBool) -> Result<(), String> {
+fn check_cancelled(cancelled: &AtomicBool) -> Result<(), GenerationError> {
     if cancelled.load(Ordering::Relaxed) {
-        Err(GENERATION_CANCELLED_ERROR.into())
+        Err(GenerationError::Cancelled)
     } else {
         Ok(())
     }
@@ -418,12 +450,29 @@ mod tests {
     }
 
     #[test]
+    fn cancellation_during_generation_preserves_existing_output() {
+        let path = test_path("cancel-existing");
+        fs::write(&path, b"original").unwrap();
+        let cancelled = AtomicBool::new(false);
+        let result = generate_to_path(test_config(), &path, &cancelled, |progress| {
+            if progress.bytes_written > 0 {
+                cancelled.store(true, Ordering::Relaxed);
+            }
+        });
+        assert!(matches!(result, Err(GenerationError::Cancelled)));
+        assert_eq!(fs::read(&path).unwrap(), b"original");
+        assert!(!sidecar_path(&path, 0, "part").exists());
+        assert!(!sidecar_path(&path, 0, "backup").exists());
+        fs::remove_file(path).unwrap();
+    }
+
+    #[test]
     fn cancellation_removes_partial_output() {
         let path = test_path("cancel");
         let error =
             generate_to_path(test_config(), &path, &AtomicBool::new(true), |_| {}).unwrap_err();
 
-        assert_eq!(error, GENERATION_CANCELLED_ERROR);
+        assert!(matches!(error, GenerationError::Cancelled));
         assert!(!path.exists());
         assert!(!sidecar_path(&path, 0, "part").exists());
     }

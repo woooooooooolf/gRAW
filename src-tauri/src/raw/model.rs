@@ -1,4 +1,28 @@
+use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
+
+#[derive(Debug)]
+pub struct ConfigError {
+    pub parameters: &'static [&'static str],
+    pub message: String,
+}
+
+impl ConfigError {
+    fn new(parameters: &'static [&'static str], message: impl Into<String>) -> Self {
+        Self {
+            parameters,
+            message: message.into(),
+        }
+    }
+}
+
+impl std::fmt::Display for ConfigError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}: {}", self.parameters.join(", "), self.message)
+    }
+}
+
+impl std::error::Error for ConfigError {}
 
 const MAX_DIMENSION: u32 = 1_000_000;
 const MAX_FRAME_COUNT: u32 = 1_000_000;
@@ -6,7 +30,7 @@ const MAX_ROW_ALIGNMENT: u32 = 1_048_576;
 const MAX_FRAME_ALIGNMENT: u32 = 1_073_741_824;
 const MAX_SAFE_INTEGER: u64 = 9_007_199_254_740_991;
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, ValueEnum)]
 #[serde(rename_all = "camelCase")]
 pub enum StorageFormat {
     Unpacked8,
@@ -16,21 +40,21 @@ pub enum StorageFormat {
     Mipi14,
 }
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, ValueEnum)]
 #[serde(rename_all = "camelCase")]
 pub enum Endianness {
     Little,
     Big,
 }
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, ValueEnum)]
 #[serde(rename_all = "camelCase")]
 pub enum BitAlignment {
     Lsb,
     Msb,
 }
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, ValueEnum)]
 #[serde(rename_all = "camelCase")]
 pub enum CfaPattern {
     Mono,
@@ -44,7 +68,7 @@ pub enum CfaPattern {
     QuadBggr,
 }
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, ValueEnum)]
 #[serde(rename_all = "camelCase")]
 pub enum TestPattern {
     Fixed,
@@ -118,72 +142,130 @@ pub struct FrameLayout {
 
 impl RawConfig {
     pub fn validate(&self) -> Result<FrameLayout, String> {
+        self.validate_detailed().map_err(|error| error.message)
+    }
+
+    pub fn validate_detailed(&self) -> Result<FrameLayout, ConfigError> {
         if self.width == 0 || self.height == 0 {
-            return Err("图像宽度和高度必须大于 0".into());
+            return Err(ConfigError::new(
+                &["--width", "--height"],
+                "图像宽度和高度必须大于 0",
+            ));
         }
         if self.width > MAX_DIMENSION || self.height > MAX_DIMENSION {
-            return Err(format!("图像宽度和高度不能超过 {MAX_DIMENSION}"));
+            return Err(ConfigError::new(
+                &["--width", "--height"],
+                format!("图像宽度和高度不能超过 {MAX_DIMENSION}"),
+            ));
         }
         if self.frame_count == 0 {
-            return Err("帧数量必须大于 0".into());
+            return Err(ConfigError::new(&["--frame-count"], "帧数量必须大于 0"));
         }
         if self.frame_count > MAX_FRAME_COUNT {
-            return Err(format!("帧数量不能超过 {MAX_FRAME_COUNT}"));
+            return Err(ConfigError::new(
+                &["--frame-count"],
+                format!("帧数量不能超过 {MAX_FRAME_COUNT}"),
+            ));
         }
         if self.row_alignment == 0 || self.frame_alignment == 0 {
-            return Err("行对齐和帧对齐必须大于 0".into());
+            return Err(ConfigError::new(
+                &["--row-alignment", "--frame-alignment"],
+                "行对齐和帧对齐必须大于 0",
+            ));
         }
         if self.row_alignment > MAX_ROW_ALIGNMENT {
-            return Err(format!("行对齐不能超过 {MAX_ROW_ALIGNMENT} 字节"));
+            return Err(ConfigError::new(
+                &["--row-alignment"],
+                format!("行对齐不能超过 {MAX_ROW_ALIGNMENT} 字节"),
+            ));
         }
         if self.frame_alignment > MAX_FRAME_ALIGNMENT {
-            return Err(format!("帧对齐不能超过 {MAX_FRAME_ALIGNMENT} 字节"));
+            return Err(ConfigError::new(
+                &["--frame-alignment"],
+                format!("帧对齐不能超过 {MAX_FRAME_ALIGNMENT} 字节"),
+            ));
         }
         if self.file_offset > MAX_SAFE_INTEGER {
-            return Err("文件起始偏移超过前端可精确表示的范围".into());
+            return Err(ConfigError::new(
+                &["--file-offset"],
+                "文件起始偏移超过前端可精确表示的范围",
+            ));
         }
         if self.test_pattern == TestPattern::RandomNoise && self.noise_seed > MAX_SAFE_INTEGER {
-            return Err("随机种子超过前端可精确表示的范围".into());
+            return Err(ConfigError::new(
+                &["--noise-seed"],
+                "随机种子超过前端可精确表示的范围",
+            ));
         }
         if !(8..=16).contains(&self.bit_depth) {
-            return Err("位深必须在 8 到 16 bit 之间".into());
+            return Err(ConfigError::new(
+                &["--bit-depth"],
+                "位深必须在 8 到 16 bit 之间",
+            ));
         }
 
         match self.storage_format {
             StorageFormat::Unpacked8 if self.bit_depth != 8 => {
-                return Err("Unpacked8 仅支持 8 bit".into());
+                return Err(ConfigError::new(
+                    &["--storage-format", "--bit-depth"],
+                    "Unpacked8 仅支持 8 bit",
+                ));
             }
             StorageFormat::Unpacked16 => {}
             StorageFormat::Mipi10 if self.bit_depth != 10 => {
-                return Err("MIPI10 仅支持 10 bit".into());
+                return Err(ConfigError::new(
+                    &["--storage-format", "--bit-depth"],
+                    "MIPI10 仅支持 10 bit",
+                ));
             }
             StorageFormat::Mipi12 if self.bit_depth != 12 => {
-                return Err("MIPI12 仅支持 12 bit".into());
+                return Err(ConfigError::new(
+                    &["--storage-format", "--bit-depth"],
+                    "MIPI12 仅支持 12 bit",
+                ));
             }
             StorageFormat::Mipi14 if self.bit_depth != 14 => {
-                return Err("MIPI14 仅支持 14 bit".into());
+                return Err(ConfigError::new(
+                    &["--storage-format", "--bit-depth"],
+                    "MIPI14 仅支持 14 bit",
+                ));
             }
             _ => {}
         }
 
         match self.storage_format {
             StorageFormat::Mipi10 | StorageFormat::Mipi14 if !self.width.is_multiple_of(4) => {
-                return Err("MIPI10/MIPI14 的宽度必须是 4 的倍数".into());
+                return Err(ConfigError::new(
+                    &["--width", "--storage-format"],
+                    "MIPI10/MIPI14 的宽度必须是 4 的倍数",
+                ));
             }
             StorageFormat::Mipi12 if !self.width.is_multiple_of(2) => {
-                return Err("MIPI12 的宽度必须是 2 的倍数".into());
+                return Err(ConfigError::new(
+                    &["--width", "--storage-format"],
+                    "MIPI12 的宽度必须是 2 的倍数",
+                ));
             }
             _ => {}
         }
 
         if self.cfa_pattern == CfaPattern::Mono && self.test_pattern.requires_color_cfa() {
-            return Err("Mono CFA 不支持彩色测试图案".into());
+            return Err(ConfigError::new(
+                &["--cfa-pattern", "--test-pattern"],
+                "Mono CFA 不支持彩色测试图案",
+            ));
         }
         if self.test_pattern == TestPattern::GraySteps && !(2..=256).contains(&self.gray_steps) {
-            return Err("灰阶数量必须在 2 到 256 之间".into());
+            return Err(ConfigError::new(
+                &["--gray-steps"],
+                "灰阶数量必须在 2 到 256 之间",
+            ));
         }
         if self.test_pattern == TestPattern::Checkerboard && self.checker_size == 0 {
-            return Err("棋盘格单元尺寸必须大于 0".into());
+            return Err(ConfigError::new(
+                &["--checker-size"],
+                "棋盘格单元尺寸必须大于 0",
+            ));
         }
 
         let max_value = if self.bit_depth == 16 {
@@ -199,7 +281,16 @@ impl RawConfig {
             ("B", self.pixel_values.b),
         ] {
             if value > max_value {
-                return Err(format!("{name} 像素值超过当前位深的最大值 {max_value}"));
+                return Err(ConfigError::new(
+                    match name {
+                        "Mono" => &["--mono"][..],
+                        "R" => &["--r"][..],
+                        "Gr" => &["--gr"][..],
+                        "Gb" => &["--gb"][..],
+                        _ => &["--b"][..],
+                    },
+                    format!("{name} 像素值超过当前位深的最大值 {max_value}"),
+                ));
             }
         }
 
@@ -214,10 +305,12 @@ impl RawConfig {
         let frame_data = checked_mul(row_stride, self.height as u64, "单帧大小溢出")?;
         let frame_stride = align_up(frame_data, self.frame_alignment as u64)?;
         let frames_size = checked_mul(frame_stride, self.frame_count as u64, "多帧大小溢出")?;
-        let total_size = self
-            .file_offset
-            .checked_add(frames_size)
-            .ok_or_else(|| "文件总大小溢出 64-bit 范围".to_string())?;
+        let total_size = self.file_offset.checked_add(frames_size).ok_or_else(|| {
+            ConfigError::new(
+                &["--file-offset", "--frame-count", "--frame-alignment"],
+                "文件总大小溢出 64-bit 范围",
+            )
+        })?;
 
         Ok(FrameLayout {
             max_value,
@@ -232,18 +325,32 @@ impl RawConfig {
     }
 }
 
-fn checked_mul(left: u64, right: u64, message: &str) -> Result<u64, String> {
-    left.checked_mul(right).ok_or_else(|| message.to_string())
+fn checked_mul(left: u64, right: u64, message: &str) -> Result<u64, ConfigError> {
+    left.checked_mul(right).ok_or_else(|| {
+        ConfigError::new(
+            &[
+                "--width",
+                "--height",
+                "--row-alignment",
+                "--frame-alignment",
+                "--frame-count",
+            ],
+            message,
+        )
+    })
 }
 
-fn align_up(value: u64, alignment: u64) -> Result<u64, String> {
+fn align_up(value: u64, alignment: u64) -> Result<u64, ConfigError> {
     let remainder = value % alignment;
     if remainder == 0 {
         Ok(value)
     } else {
-        value
-            .checked_add(alignment - remainder)
-            .ok_or_else(|| "对齐计算溢出 64-bit 范围".to_string())
+        value.checked_add(alignment - remainder).ok_or_else(|| {
+            ConfigError::new(
+                &["--row-alignment", "--frame-alignment"],
+                "对齐计算溢出 64-bit 范围",
+            )
+        })
     }
 }
 
