@@ -60,6 +60,9 @@ jobs:
       - name: Build portable executable
         run: npm run tauri build -- --no-bundle
 
+      - name: Test release CLI
+        run: npm run test:cli
+
       - name: Stage release artifacts
         shell: pwsh
         run: |

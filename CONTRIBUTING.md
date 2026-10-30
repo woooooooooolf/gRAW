@@ -27,6 +27,8 @@ npm run tauri dev
 - `cargo fmt --manifest-path src-tauri/Cargo.toml -- --check`：Rust 格式检查
 - `cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets --all-features -- -D warnings`：严格 Rust 代码检查
 - `cargo test --manifest-path src-tauri/Cargo.toml`：Rust 测试
+- `npm run tauri build -- --no-bundle`：构建实际 Windows Release EXE
+- `npm run test:cli`：对 Release EXE 运行命令行端到端测试（可用 GRAW_EXE 指定其他构建路径）
 
 ## 发布流程
 

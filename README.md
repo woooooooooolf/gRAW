@@ -135,6 +135,12 @@ Get-FileHash -Algorithm SHA256 .\gRAW-windows-x64-v<版本>.exe
 
 此外，[发布工作流](./.github/workflows/release.yml) 会在推送 `v*` 标签时自动构建便携版并创建 GitHub Release：产物按 `gRAW-windows-x64-v<版本>.exe` 命名并附带 SHA-256 校验文件，发布说明取自仓库根目录的 `RELEASE_NOTES.md`。
 
+## 命令行调用
+
+同一个 EXE 无参数时打开界面，有参数时直接执行命令行任务。CLI 要求所有影响当前输出的生成参数显式提供，支持 --dry-run 仅检查、直接覆盖已有输出、进度和取消。
+
+参数清单、条件必填规则及 PowerShell/CMD/Python 的可靠等待方式见 [命令行使用指南](./docs/CLI.md)。Windows GUI 子系统程序的直接调用可能提前返回，自动化时请按指南等待进程退出并检查退出码。
+
 ## 输出模型
 
 对于有效配置，gRAW 按以下关系计算文件大小：

@@ -1,4 +1,7 @@
+mod cli;
 mod raw;
+
+pub use cli::run_cli;
 
 use std::{
     path::PathBuf,
@@ -62,7 +65,7 @@ async fn generate_raw(
     })
     .await
     .map_err(|error| format!("生成任务异常终止：{error}"))
-    .and_then(|result| result);
+    .and_then(|result| result.map_err(|error| error.to_string()));
 
     if let Ok(mut active) = state.active.lock() {
         *active = None;

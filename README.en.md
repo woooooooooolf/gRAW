@@ -135,6 +135,12 @@ The badges above show the live CI and latest release status.
 
 In addition, the [release workflow](./.github/workflows/release.yml) builds the portable executable and creates a GitHub Release whenever a `v*` tag is pushed. Artifacts follow the `gRAW-windows-x64-v<version>.exe` naming convention and ship with a SHA-256 checksum file; release notes are taken from `RELEASE_NOTES.md` at the repository root.
 
+## Command-line usage
+
+The same EXE opens the GUI without arguments and runs a headless generation task when given arguments. Every parameter affecting the selected output must be explicit. The CLI supports --dry-run, replacement of existing output, progress, and cancellation.
+
+See the [CLI guide](./docs/CLI.en.md) for parameters, conditional requirements, and reliable PowerShell/CMD/Python invocation. Direct invocation of a Windows GUI-subsystem executable may return early; automation must wait for completion and inspect the exit code.
+
 ## Output model
 
 For a valid configuration, gRAW calculates the file size as:
