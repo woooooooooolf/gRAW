@@ -94,6 +94,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "base64",
+    "version": "0.23.1",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/marshallpierce/rust-base64"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "bit-set",
     "version": "0.8.0",
     "license": "Apache-2.0 OR MIT",
@@ -105,13 +112,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "version": "0.8.0",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/contain-rs/bit-vec"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "bitflags",
-    "version": "1.3.2",
-    "license": "MIT/Apache-2.0",
-    "homepage": "https://github.com/bitflags/bitflags"
   },
   {
     "ecosystem": "Cargo",
@@ -578,7 +578,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "ico",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "license": "MIT",
     "homepage": "https://github.com/mdsteele/rust-ico"
   },
@@ -900,13 +900,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "png",
-    "version": "0.17.16",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/image-rs/image-png"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "png",
     "version": "0.18.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/image-rs/image-png"
@@ -998,7 +991,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "rfd",
-    "version": "0.16.0",
+    "version": "0.17.2",
     "license": "MIT",
     "homepage": "https://github.com/PolyMeilex/rfd"
   },
@@ -1278,28 +1271,28 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri",
-    "version": "2.12.2",
+    "version": "2.12.5",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-build",
-    "version": "2.7.3",
+    "version": "2.7.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-codegen",
-    "version": "2.7.1",
+    "version": "2.7.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-macros",
-    "version": "2.7.1",
+    "version": "2.7.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
@@ -1313,7 +1306,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-dialog",
-    "version": "2.8.3",
+    "version": "2.8.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1334,14 +1327,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-runtime",
-    "version": "2.12.1",
+    "version": "2.12.2",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-runtime-wry",
-    "version": "2.12.1",
+    "version": "2.12.3",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
@@ -1648,13 +1641,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
-    "name": "windows_x86_64_msvc",
-    "version": "0.53.1",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
     "name": "windows-collections",
     "version": "0.3.2",
     "license": "MIT OR Apache-2.0",
@@ -1726,13 +1712,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "windows-sys",
-    "version": "0.60.2",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-sys",
     "version": "0.61.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
@@ -1741,13 +1720,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "ecosystem": "Cargo",
     "name": "windows-targets",
     "version": "0.52.6",
-    "license": "MIT OR Apache-2.0",
-    "homepage": "https://github.com/microsoft/windows-rs"
-  },
-  {
-    "ecosystem": "Cargo",
-    "name": "windows-targets",
-    "version": "0.53.5",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/microsoft/windows-rs"
   },
@@ -1894,7 +1866,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-dialog",
-    "version": "2.8.3",
+    "version": "2.8.4",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
