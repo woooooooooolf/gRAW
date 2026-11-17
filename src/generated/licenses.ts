@@ -1824,14 +1824,14 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@oxc-project/types",
-    "version": "0.155.0",
+    "version": "0.156.0",
     "license": "MIT",
     "homepage": "https://oxc.rs"
   },
   {
     "ecosystem": "npm",
     "name": "@rolldown/binding-win32-x64-msvc",
-    "version": "1.2.15",
+    "version": "1.2.16",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -1901,7 +1901,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@vitejs/plugin-react",
-    "version": "6.1.2",
+    "version": "6.2.1",
     "license": "MIT",
     "homepage": "https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#readme"
   },
@@ -1964,7 +1964,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "postcss",
-    "version": "8.5.31",
+    "version": "8.5.32",
     "license": "MIT",
     "homepage": "https://postcss.org/"
   },
@@ -1985,7 +1985,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "rolldown",
-    "version": "1.2.15",
+    "version": "1.2.16",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -2020,7 +2020,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "vite",
-    "version": "8.3.5",
+    "version": "8.3.6",
     "license": "MIT",
     "homepage": "https://vite.dev"
   }
