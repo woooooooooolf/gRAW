@@ -1320,7 +1320,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-plugin-opener",
-    "version": "2.7.2",
+    "version": "2.7.3",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1831,7 +1831,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@rolldown/binding-win32-x64-msvc",
-    "version": "1.2.16",
+    "version": "1.2.19",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -1873,7 +1873,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/plugin-opener",
-    "version": "2.7.2",
+    "version": "2.7.3",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/tauri-apps/plugins-workspace"
   },
@@ -1901,7 +1901,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@vitejs/plugin-react",
-    "version": "6.2.1",
+    "version": "6.3.0",
     "license": "MIT",
     "homepage": "https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#readme"
   },
@@ -1985,7 +1985,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "rolldown",
-    "version": "1.2.16",
+    "version": "1.2.19",
     "license": "MIT",
     "homepage": "https://rolldown.rs/"
   },
@@ -2020,7 +2020,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "vite",
-    "version": "8.3.6",
+    "version": "8.3.8",
     "license": "MIT",
     "homepage": "https://vite.dev"
   }
