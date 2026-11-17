@@ -27,7 +27,7 @@ jobs:
 
     env:
       VERSION: ${{ github.event.inputs.version || github.ref_name }}
-      ARTIFACT: gRAW-windows-x64-${{ github.event.inputs.version || github.ref_name }}.exe
+      ARTIFACT: gRAW-${{ github.event.inputs.version || github.ref_name }}-windows-x64.exe
 
     steps:
       - name: Harden Runner
@@ -45,6 +45,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
+
+      - name: Check release notes
+        run: npm run release:check
 
       - name: Set up stable Rust
         shell: pwsh
@@ -92,7 +95,7 @@ jobs:
       - name: Attest build provenance
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
-          subject-path: ${{ env.ARTIFACTS_DIR }}/gRAW-windows-x64-${{ env.VERSION }}.exe
+          subject-path: ${{ env.ARTIFACTS_DIR }}/${{ env.ARTIFACT }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
@@ -102,6 +105,8 @@ jobs:
           body_path: RELEASE_NOTES.md
           draft: false
           prerelease: false
+          generate_release_notes: false
+          fail_on_unmatched_files: true
           files: |
-            ${{ env.ARTIFACTS_DIR }}/gRAW-windows-x64-${{ env.VERSION }}.exe
-            ${{ env.ARTIFACTS_DIR }}/gRAW-windows-x64-${{ env.VERSION }}.exe.sha256
+            ${{ env.ARTIFACTS_DIR }}/${{ env.ARTIFACT }}
+            ${{ env.ARTIFACTS_DIR }}/${{ env.ARTIFACT }}.sha256

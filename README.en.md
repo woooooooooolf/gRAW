@@ -82,7 +82,7 @@ When a color pattern is active and the CFA is changed to Mono, gRAW automaticall
 
 ### Use a portable build
 
-1. Obtain a file named `gRAW-windows-x64-v<version>.exe` and its SHA-256 checksum file from the project release artifacts.
+1. Obtain a file named `gRAW-v<version>-windows-x64.exe` and its SHA-256 checksum file from the project release artifacts.
 2. Launch the executable directly; installation is not required.
 3. Configure image dimensions and CFA layout.
 4. Select a compatible test pattern and storage format.
@@ -114,10 +114,10 @@ npm run tauri dev
 | `cargo test --manifest-path src-tauri/Cargo.toml` | Run RAW layout, packing, pattern, and generator tests |
 | `npm run tauri build -- --no-bundle` | Build the portable Windows executable |
 
-The unbundled executable is written to `src-tauri/target/release/graw.exe`. Iteration artifacts use the naming convention `gRAW-windows-x64-v<version>.exe` and ship with a `.sha256` checksum file. Verify the download with:
+The unbundled executable is written to `src-tauri/target/release/graw.exe`. Iteration artifacts use the naming convention `gRAW-v<version>-windows-x64.exe` and ship with a `.sha256` checksum file. Verify the download with:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\gRAW-windows-x64-v<version>.exe
+Get-FileHash -Algorithm SHA256 .\gRAW-v<version>-windows-x64.exe
 ```
 
 Compare the printed hash with the content of the `.sha256` file to confirm file integrity.
@@ -133,7 +133,7 @@ The [GitHub Actions workflow](./.github/workflows/ci.yml) runs on pushes, pull r
 
 The badges above show the live CI and latest release status.
 
-In addition, the [release workflow](./.github/workflows/release.yml) builds the portable executable and creates a GitHub Release whenever a `v*` tag is pushed. Artifacts follow the `gRAW-windows-x64-v<version>.exe` naming convention and ship with a SHA-256 checksum file; release notes are taken from `RELEASE_NOTES.md` at the repository root.
+In addition, the [release workflow](./.github/workflows/release.yml) builds the portable executable and creates a GitHub Release whenever a `v*` tag is pushed. Each platform and architecture ships only the executable (`gRAW-v<version>-windows-x64.exe` for Windows x64) and its matching `.exe.sha256` checksum file, without an additional archive. Release notes come from `RELEASE_NOTES.md` and use Simplified Chinese bullet lists under `Changed`, `Fixed`, and `Docs`, with no top-level heading or translations. See the [release policy](./CONTRIBUTING.md#发布流程).
 
 ## Command-line usage
 

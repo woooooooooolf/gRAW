@@ -82,7 +82,7 @@ gRAW 用于生成确定性的无文件头 RAW 测试图像，适合传感器图�
 
 ### 使用便携版
 
-1. 从项目发布产物中获取 `gRAW-windows-x64-v<版本>.exe` 及其 SHA-256 校验文件。
+1. 从项目发布产物中获取 `gRAW-v<版本>-windows-x64.exe` 及其 SHA-256 校验文件。
 2. 直接运行该文件，无需安装。
 3. 配置图像尺寸和 CFA 阵列。
 4. 选择兼容的测试图案与存储格式。
@@ -114,10 +114,10 @@ npm run tauri dev
 | `cargo test --manifest-path src-tauri/Cargo.toml` | 执行 RAW 布局、打包、图案和生成器测试 |
 | `npm run tauri build -- --no-bundle` | 构建 Windows 便携版程序 |
 
-未打包的可执行文件生成在 `src-tauri/target/release/graw.exe`。每轮迭代的便携版采用 `gRAW-windows-x64-v<版本>.exe` 命名，并同步提供 `.sha256` 校验文件，可通过以下命令核对：
+未打包的可执行文件生成在 `src-tauri/target/release/graw.exe`。每轮迭代的便携版采用 `gRAW-v<版本>-windows-x64.exe` 命名，并同步提供 `.sha256` 校验文件，可通过以下命令核对：
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\gRAW-windows-x64-v<版本>.exe
+Get-FileHash -Algorithm SHA256 .\gRAW-v<版本>-windows-x64.exe
 ```
 
 将输出中的哈希值与 `.sha256` 文件中的内容比对即可确认文件完整性。
@@ -133,7 +133,7 @@ Get-FileHash -Algorithm SHA256 .\gRAW-windows-x64-v<版本>.exe
 
 顶部徽章显示 CI 与最新发布状态。
 
-此外，[发布工作流](./.github/workflows/release.yml) 会在推送 `v*` 标签时自动构建便携版并创建 GitHub Release：产物按 `gRAW-windows-x64-v<版本>.exe` 命名并附带 SHA-256 校验文件，发布说明取自仓库根目录的 `RELEASE_NOTES.md`。
+此外，[发布工作流](./.github/workflows/release.yml) 会在推送 `v*` 标签时自动构建便携版并创建 GitHub Release：每个平台和架构仅上传 `gRAW-v<版本>-windows-x64.exe` 及其同名 `.exe.sha256` 校验文件，不额外压缩。发布说明取自仓库根目录的 `RELEASE_NOTES.md`，使用简体中文，正文仅包含 `Changed`、`Fixed`、`Docs` 小标题及无序列表。完整约束见[发布流程](./CONTRIBUTING.md#发布流程)。
 
 ## 命令行调用
 
