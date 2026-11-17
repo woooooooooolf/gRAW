@@ -42,6 +42,9 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
+      - name: Check release notes
+        run: npm run release:check
+
       - name: Check third-party license data
         run: npm run licenses:check
 

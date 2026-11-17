@@ -9,6 +9,7 @@
     "build": "tsc && vite build",
     "licenses": "node scripts/generate-licenses.mjs",
     "licenses:check": "npm run licenses && git diff --exit-code -- src/generated/licenses.ts",
+    "release:check": "node scripts/check-release-notes.mjs",
     "test:frontend": "node --experimental-strip-types --test tests/input.test.mjs tests/viewport.test.mjs tests/font-size.test.mjs tests/cfa-pattern.test.mjs tests/config-validation.test.mjs tests/interface-layout.test.mjs",
     "preview": "vite preview",
     "tauri": "tauri",
