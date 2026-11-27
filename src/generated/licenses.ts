@@ -123,7 +123,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "block-buffer",
-    "version": "0.10.4",
+    "version": "0.12.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/RustCrypto/utils"
   },
@@ -221,7 +221,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "clap",
-    "version": "4.6.7",
+    "version": "4.6.9",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/clap-rs/clap"
   },
@@ -235,7 +235,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "clap_derive",
-    "version": "4.6.7",
+    "version": "4.6.9",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/clap-rs/clap"
   },
@@ -255,6 +255,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
+    "name": "const-oid",
+    "version": "0.10.3",
+    "license": "Apache-2.0 OR MIT",
+    "homepage": "https://github.com/RustCrypto/formats/tree/master/const-oid"
+  },
+  {
+    "ecosystem": "Cargo",
     "name": "cookie",
     "version": "0.18.1",
     "license": "MIT OR Apache-2.0",
@@ -263,7 +270,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "cpufeatures",
-    "version": "0.2.17",
+    "version": "0.3.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/RustCrypto/utils"
   },
@@ -291,7 +298,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "crypto-common",
-    "version": "0.1.7",
+    "version": "0.2.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/RustCrypto/traits"
   },
@@ -361,7 +368,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "digest",
-    "version": "0.10.7",
+    "version": "0.11.3",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/RustCrypto/traits"
   },
@@ -507,13 +514,6 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   },
   {
     "ecosystem": "Cargo",
-    "name": "generic-array",
-    "version": "0.14.7",
-    "license": "MIT",
-    "homepage": "https://github.com/fizyk20/generic-array.git"
-  },
-  {
-    "ecosystem": "Cargo",
     "name": "getrandom",
     "version": "0.3.4",
     "license": "MIT OR Apache-2.0",
@@ -574,6 +574,13 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
     "version": "1.4.2",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/hyperium/http"
+  },
+  {
+    "ecosystem": "Cargo",
+    "name": "hybrid-array",
+    "version": "0.4.15",
+    "license": "MIT OR Apache-2.0",
+    "homepage": "https://github.com/RustCrypto/hybrid-array"
   },
   {
     "ecosystem": "Cargo",
@@ -1159,7 +1166,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "sha2",
-    "version": "0.10.9",
+    "version": "0.11.1",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/RustCrypto/hashes"
   },
@@ -1250,7 +1257,7 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "syn",
-    "version": "3.0.3",
+    "version": "3.0.10",
     "license": "MIT OR Apache-2.0",
     "homepage": "https://github.com/dtolnay/syn"
   },
@@ -1271,28 +1278,28 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri",
-    "version": "2.12.5",
+    "version": "2.12.7",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-build",
-    "version": "2.7.4",
+    "version": "2.7.6",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-codegen",
-    "version": "2.7.4",
+    "version": "2.7.6",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-macros",
-    "version": "2.7.4",
+    "version": "2.7.6",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
@@ -1327,21 +1334,21 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "Cargo",
     "name": "tauri-runtime",
-    "version": "2.12.2",
+    "version": "2.12.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-runtime-wry",
-    "version": "2.12.3",
+    "version": "2.12.5",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
   {
     "ecosystem": "Cargo",
     "name": "tauri-utils",
-    "version": "2.10.2",
+    "version": "2.10.4",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://tauri.app/"
   },
@@ -1845,21 +1852,21 @@ export const THIRD_PARTY_COMPONENTS: ThirdPartyComponent[] = [
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/api",
-    "version": "2.12.4",
+    "version": "2.12.5",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/cli",
-    "version": "2.12.4",
+    "version": "2.12.6",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
   {
     "ecosystem": "npm",
     "name": "@tauri-apps/cli-win32-x64-msvc",
-    "version": "2.12.4",
+    "version": "2.12.6",
     "license": "Apache-2.0 OR MIT",
     "homepage": "https://github.com/tauri-apps/tauri#readme"
   },
